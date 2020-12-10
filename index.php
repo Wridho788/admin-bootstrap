@@ -149,15 +149,15 @@ require("conf/conn.php");
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Revenue MTD</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <h5> Rp.
+                                             Rp.
                                                 <?php
-                                                $queryMTD = "select count(*) as revenue from excel where date between '2020-01-01' and '2020-01-09'";
-                                                $data = mysqli_query($koneksi,$queryMTD);
+                                                $queryRMTD = "select count(*) as revenue from excel where date between '2020-01-01' and '2020-01-09'";
+                                                $dataMTD = mysqli_query($koneksi,$queryRMTD);
 
-                                                    while($row = mysqli_fetch_assoc($data)){
+                                                    while($row = mysqli_fetch_assoc($dataMTD)){
                                                         echo $row['revenue'];
-                                                        echo number_format($row['revenue']); }
-                                                ?> B </h5>
+                                                      }
+                                                ?> B 
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -176,15 +176,15 @@ require("conf/conn.php");
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Growth MoM</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"> 
-                                                <h5> Rp.
+                                                
                                                 <?php
-                                                $queryM = "select count(*) as revenue from excel where date between '2019-12-01' and '2020-01-01'";
-                                                $data = mysqli_query($koneksi,$queryM);
+                                                $queryMOM = "select count(*) as revenue from excel where date between '2019-12-01' and '2020-01-01'";
+                                                $dataMOM = mysqli_query($koneksi,$queryMOM);
 
-                                                    while($row = mysqli_fetch_assoc($data)){
-                                                        echo $row['revenue']*100/2;
-                                                        echo number_format($row['revenue'],2); }
-                                                ?> B </h5>
+                                                    while($row = mysqli_fetch_assoc($dataMOM)){
+                                                        echo $row['revenue']; 
+                                                    }    
+                                                ?> %
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -203,15 +203,15 @@ require("conf/conn.php");
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Growth YoY</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <h5> Rp.
+                                            
                                                 <?php
-                                                $queryY = "select count(*) as revenue from excel where date between '2019-01-01' and '2020-01-01'";
-                                                $data = mysqli_query($koneksi,$queryY);
+                                                $queryYOY = "select count(*) as revenue from excel where date between '2019-01-01' and '2020-01-01'";
+                                                $dataYOY = mysqli_query($koneksi,$queryYOY);
 
-                                                    while($row = mysqli_fetch_assoc($data)){
+                                                    while($row = mysqli_fetch_assoc($dataYOY)){
                                                         echo $row['revenue'];
-                                                        echo number_format($row['revenue'],1); }
-                                                ?> B </h5>
+                                                    }
+                                                ?> % 
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -230,15 +230,14 @@ require("conf/conn.php");
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Growth YTD</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <h5> Rp.
                                                 <?php
-                                                $queryM = "select count(*) as revenue from excel where date between '2019-01-01' and '2020-01-01'";
-                                                $data = mysqli_query($koneksi,$queryM);
+                                                $queryYTD = "select count(*) as revenue from excel where date between '2020-01-01' and '2020-01-31'";
+                                                $dataYTD = mysqli_query($koneksi,$queryYTD);
 
-                                                    while($row = mysqli_fetch_assoc($data)){
+                                                    while($row = mysqli_fetch_assoc($dataYTD)){
                                                         echo $row['revenue'];
-                                                        echo number_format($row['revenue'],1); }
-                                                ?> B </h5>
+                                                    }
+                                                ?> %
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -256,15 +255,15 @@ require("conf/conn.php");
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 DU Last Month</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"> <h5>Rp. 
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"> Rp. 
                                                 <?php
-                                                    $query = "select count(*) as revenue from excel where date between '2019-12-01' and '2019-12-31'";
-                                                    $data = mysqli_query($koneksi,$query);
+                                                    $queryLast = "select count(*) as revenue from excel where date between '2019-12-01' and '2019-12-31'";
+                                                    $dataLast = mysqli_query($koneksi,$queryLast);
                                                     
-                                                    while($row = mysqli_fetch_assoc($data)){
+                                                    while($row = mysqli_fetch_assoc($dataLast)){
                                                         echo $row['revenue'];
-                                                        echo number_format($row['revenue']); }
-                                                ?> B </h5>
+                                                    }
+                                                ?> B 
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -283,15 +282,15 @@ require("conf/conn.php");
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 DU MTD</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <h5> Rp.
+                                             Rp.
                                                 <?php
-                                                $queryM = "select count(*) as revenue from excel where date between '2020-01-01' and '2020-01-30'";
-                                                $data = mysqli_query($koneksi,$queryM);
+                                                $queryMTD = "select count(*) as revenue from excel where date between '2020-01-01' and '2020-01-30'";
+                                                $dataMTD = mysqli_query($koneksi,$queryMTD);
 
-                                                    while($row = mysqli_fetch_assoc($data)){
+                                                    while($row = mysqli_fetch_assoc($dataMTD)){
                                                         echo $row['revenue'];
-                                                        echo number_format($row['revenue'],1); }
-                                                ?> B </h5>
+                                                        }
+                                                ?> B 
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -330,30 +329,108 @@ require("conf/conn.php");
                                             <td>Revenue MTD</td>
                                             <td>Revenue MTD</td>
                                         </tr>
+                                        <!-- revenue mtd -->
                                         <tr>
                                             <td></td>
                                             <td></td>
                                             <td>
                                             Rp. 
                                                 <?php
-                                                    $queryS = "select count(*) as revenue from excel where date between '2019-01-01' and '2020-01-31'";
-                                                    $data = mysqli_query($koneksi,$queryS);
+                                                    $querySMS = "select count(*) as revenue from excel where date between '2019-01-01' and '2020-01-31' order by l1";
+                                                    $dataSMS = mysqli_query($koneksi,$querySMS);
                                                     
-                                                    while($row = mysqli_fetch_assoc($data)){
+                                                    while($row = mysqli_fetch_assoc($dataSMS)){
                                                         echo $row['revenue'];
-                                                        echo number_format($row['revenue'],2); }
+                                                       }
                                                 ?> 
+                                                B
                                             </td>
                                             <td>
                                             Rp. 
                                                 <?php
-                                                    $queryS = "select count(*) as revenue from excel where date between '2019-01-01' and '2020-01-31'";
-                                                    $data = mysqli_query($koneksi,$queryS);
+                                                    $queryV = "select count(*) as revenue from excel where date between '2019-01-01' and '2020-01-31' order by l1";
+                                                    $dataV = mysqli_query($koneksi,$queryV);
                                                     
-                                                    while($row = mysqli_fetch_assoc($data)){
+                                                    while($row = mysqli_fetch_assoc($dataV)){
                                                         echo $row['revenue'];
-                                                        echo number_format($row['revenue']); }
+                                                         }
                                                 ?> 
+                                                B
+                                            </td>
+                                        </tr>
+                                        <!-- mom -->
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                            <?php
+                                                $queryMS = "select count(*) as revenue from excel where date between '2019-12-01' and '2020-01-01' order by l1";
+                                                $dataMS = mysqli_query($koneksi,$queryMS);
+
+                                                    while($row = mysqli_fetch_assoc($dataMS)){
+                                                        echo $row['revenue']; 
+                                                    }    
+                                                ?> %
+                                            </td>
+                                            <td>
+                                            <?php
+                                                $queryVP = "select count(*) as revenue from excel where date between '2019-12-01' and '2020-01-01' order by l1";
+                                                $dataVP = mysqli_query($koneksi,$queryVP);
+
+                                                    while($row = mysqli_fetch_assoc($dataVP)){
+                                                        echo $row['revenue']; 
+                                                    }    
+                                                ?> %
+                                            </td>
+                                        </tr>
+                                        <!-- yoy -->
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                            <?php
+                                                $queryYOY = "select count(*) as revenue from excel where date between '2019-01-01' and '2020-01-01' order by l1";
+                                                $dataYOY = mysqli_query($koneksi,$queryYOY);
+
+                                                    while($row = mysqli_fetch_assoc($dataYOY)){
+                                                        echo $row['revenue'];
+                                                    }
+                                                ?> %
+                                            </td>
+                                            <td>
+                                            <?php
+                                                $queryYOY = "select count(*) as revenue from excel where date between '2019-01-01' and '2020-01-01' order by l1";
+                                                $dataYOY = mysqli_query($koneksi,$queryYOY);
+
+                                                    while($row = mysqli_fetch_assoc($dataYOY)){
+                                                        echo $row['revenue'];
+                                                    }
+                                                ?> %
+                                            </td>
+                                        </tr>
+                                        <!-- ytd -->
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                            <?php
+                                                $queryYTD = "select count(*) as revenue from excel where date between '2020-01-01' and '2020-01-31' order by l1";
+                                                $dataYTD = mysqli_query($koneksi,$queryYTD);
+
+                                                    while($row = mysqli_fetch_assoc($dataYTD)){
+                                                        echo $row['revenue'];
+                                                    }
+                                                ?> %
+                                            </td>
+                                            <td>
+                                            <?php
+                                                $queryYTD = "select count(*) as revenue from excel where date between '2020-01-01' and '2020-01-31' order by l1";
+                                                $dataYTD = mysqli_query($koneksi,$queryYTD);
+
+                                                    while($row = mysqli_fetch_assoc($dataYTD)){
+                                                        echo $row['revenue'];
+                                                    }
+                                                ?> %
                                             </td>
                                         </tr>
                                 </table>
