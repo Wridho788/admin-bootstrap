@@ -1,4 +1,4 @@
-<?php 
+<?php
 require("conf/conn.php");
 
 
@@ -18,9 +18,7 @@ require("conf/conn.php");
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -74,18 +72,14 @@ require("conf/conn.php");
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
                             <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
+                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="button">
                                                 <i class="fas fa-search fa-sm"></i>
@@ -98,15 +92,12 @@ require("conf/conn.php");
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Ridho Wahyu Nugroho</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
@@ -149,15 +140,15 @@ require("conf/conn.php");
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Revenue MTD</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                             Rp.
+                                                Rp.
                                                 <?php
                                                 $queryRMTD = "select count(*) as revenue from excel where date between '2020-01-01' and '2020-01-09'";
-                                                $dataMTD = mysqli_query($koneksi,$queryRMTD);
+                                                $dataMTD = mysqli_query($koneksi, $queryRMTD);
 
-                                                    while($row = mysqli_fetch_assoc($dataMTD)){
-                                                        echo $row['revenue'];
-                                                      }
-                                                ?> B 
+                                                while ($row = mysqli_fetch_assoc($dataMTD)) {
+                                                    echo $row['revenue'];
+                                                }
+                                                ?> B
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -175,15 +166,15 @@ require("conf/conn.php");
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Growth MoM</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"> 
-                                                
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+
                                                 <?php
                                                 $queryMOM = "select count(*) as revenue from excel where date between '2019-12-01' and '2020-01-01'";
-                                                $dataMOM = mysqli_query($koneksi,$queryMOM);
+                                                $dataMOM = mysqli_query($koneksi, $queryMOM);
 
-                                                    while($row = mysqli_fetch_assoc($dataMOM)){
-                                                        echo $row['revenue']; 
-                                                    }    
+                                                while ($row = mysqli_fetch_assoc($dataMOM)) {
+                                                    echo $row['revenue'];
+                                                }
                                                 ?> %
                                             </div>
                                         </div>
@@ -203,15 +194,15 @@ require("conf/conn.php");
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Growth YoY</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            
+
                                                 <?php
                                                 $queryYOY = "select count(*) as revenue from excel where date between '2019-01-01' and '2020-01-01'";
-                                                $dataYOY = mysqli_query($koneksi,$queryYOY);
+                                                $dataYOY = mysqli_query($koneksi, $queryYOY);
 
-                                                    while($row = mysqli_fetch_assoc($dataYOY)){
-                                                        echo $row['revenue'];
-                                                    }
-                                                ?> % 
+                                                while ($row = mysqli_fetch_assoc($dataYOY)) {
+                                                    echo $row['revenue'];
+                                                }
+                                                ?> %
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -221,8 +212,8 @@ require("conf/conn.php");
                                 </div>
                             </div>
                         </div>
-                       <!-- growth YTD Card Example -->
-                       <div class="col-xl-3 col-md-6 mb-4">
+                        <!-- growth YTD Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -232,11 +223,11 @@ require("conf/conn.php");
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 <?php
                                                 $queryYTD = "select count(*) as revenue from excel where date between '2020-01-01' and '2020-01-31'";
-                                                $dataYTD = mysqli_query($koneksi,$queryYTD);
+                                                $dataYTD = mysqli_query($koneksi, $queryYTD);
 
-                                                    while($row = mysqli_fetch_assoc($dataYTD)){
-                                                        echo $row['revenue'];
-                                                    }
+                                                while ($row = mysqli_fetch_assoc($dataYTD)) {
+                                                    echo $row['revenue'];
+                                                }
                                                 ?> %
                                             </div>
                                         </div>
@@ -255,15 +246,15 @@ require("conf/conn.php");
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 DU Last Month</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"> Rp. 
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"> Rp.
                                                 <?php
-                                                    $queryLast = "select count(*) as revenue from excel where date between '2019-12-01' and '2019-12-31'";
-                                                    $dataLast = mysqli_query($koneksi,$queryLast);
-                                                    
-                                                    while($row = mysqli_fetch_assoc($dataLast)){
-                                                        echo $row['revenue'];
-                                                    }
-                                                ?> B 
+                                                $queryLast = "select count(*) as revenue from excel where date between '2019-12-01' and '2019-12-31'";
+                                                $dataLast = mysqli_query($koneksi, $queryLast);
+
+                                                while ($row = mysqli_fetch_assoc($dataLast)) {
+                                                    echo $row['revenue'];
+                                                }
+                                                ?> B
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -282,15 +273,15 @@ require("conf/conn.php");
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 DU MTD</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                             Rp.
+                                                Rp.
                                                 <?php
                                                 $queryMTD = "select count(*) as revenue from excel where date between '2020-01-01' and '2020-01-30'";
-                                                $dataMTD = mysqli_query($koneksi,$queryMTD);
+                                                $dataMTD = mysqli_query($koneksi, $queryMTD);
 
-                                                    while($row = mysqli_fetch_assoc($dataMTD)){
-                                                        echo $row['revenue'];
-                                                        }
-                                                ?> B 
+                                                while ($row = mysqli_fetch_assoc($dataMTD)) {
+                                                    echo $row['revenue'];
+                                                }
+                                                ?> B
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -301,158 +292,152 @@ require("conf/conn.php");
                             </div>
                         </div>
 
-                       
+
                     </div>
                     <!-- Begin Page Content -->
-                <div class="container-fluid">
+                    <div class="container-fluid">
 
-                <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">L1 Data Table</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>BroadBand</th>
-                                            <th>Digital Services</th>
-                                            <th>SMS P2P</th>
-                                            <th>Voice P2P</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Revenue MTD</td>
-                                            <td>Revenue MTD</td>
-                                            <td>Revenue MTD</td>
-                                            <td>Revenue MTD</td>
-                                        </tr>
-                                        <!-- revenue mtd -->
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                            Rp. 
-                                                <?php
+                        <!-- DataTales Example -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">L1 Data Table</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>BroadBand</th>
+                                                <th>Digital Services</th>
+                                                <th>SMS P2P</th>
+                                                <th>Voice P2P</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Revenue MTD</td>
+                                                <td>Revenue MTD</td>
+                                                <td>Revenue MTD</td>
+                                                <td>Revenue MTD</td>
+                                            </tr>
+                                            <!-- revenue mtd -->
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    Rp.
+                                                    <?php
                                                     $querySMS = "select count(*) as revenue from excel where date between '2019-01-01' and '2020-01-31' order by l1";
-                                                    $dataSMS = mysqli_query($koneksi,$querySMS);
-                                                    
-                                                    while($row = mysqli_fetch_assoc($dataSMS)){
+                                                    $dataSMS = mysqli_query($koneksi, $querySMS);
+
+                                                    while ($row = mysqli_fetch_assoc($dataSMS)) {
                                                         echo $row['revenue'];
-                                                       }
-                                                ?> 
-                                                B
-                                            </td>
-                                            <td>
-                                            Rp. 
-                                                <?php
+                                                    }
+                                                    ?>
+                                                    B
+                                                </td>
+                                                <td>
+                                                    Rp.
+                                                    <?php
                                                     $queryV = "select count(*) as revenue from excel where date between '2019-01-01' and '2020-01-31' order by l1";
-                                                    $dataV = mysqli_query($koneksi,$queryV);
-                                                    
-                                                    while($row = mysqli_fetch_assoc($dataV)){
-                                                        echo $row['revenue'];
-                                                         }
-                                                ?> 
-                                                B
-                                            </td>
-                                        </tr>
-                                        <!-- mom -->
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                            <?php
-                                                $queryMS = "select count(*) as revenue from excel where date between '2019-12-01' and '2020-01-01' order by l1";
-                                                $dataMS = mysqli_query($koneksi,$queryMS);
+                                                    $dataV = mysqli_query($koneksi, $queryV);
 
-                                                    while($row = mysqli_fetch_assoc($dataMS)){
-                                                        echo $row['revenue']; 
-                                                    }    
-                                                ?> %
-                                            </td>
-                                            <td>
-                                            <?php
-                                                $queryVP = "select count(*) as revenue from excel where date between '2019-12-01' and '2020-01-01' order by l1";
-                                                $dataVP = mysqli_query($koneksi,$queryVP);
-
-                                                    while($row = mysqli_fetch_assoc($dataVP)){
-                                                        echo $row['revenue']; 
-                                                    }    
-                                                ?> %
-                                            </td>
-                                        </tr>
-                                        <!-- yoy -->
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                            <?php
-                                                $queryYOY = "select count(*) as revenue from excel where date between '2019-01-01' and '2020-01-01' order by l1";
-                                                $dataYOY = mysqli_query($koneksi,$queryYOY);
-
-                                                    while($row = mysqli_fetch_assoc($dataYOY)){
+                                                    while ($row = mysqli_fetch_assoc($dataV)) {
                                                         echo $row['revenue'];
                                                     }
-                                                ?> %
-                                            </td>
-                                            <td>
-                                            <?php
-                                                $queryYOY = "select count(*) as revenue from excel where date between '2019-01-01' and '2020-01-01' order by l1";
-                                                $dataYOY = mysqli_query($koneksi,$queryYOY);
+                                                    ?>
+                                                    B
+                                                </td>
+                                            </tr>
+                                            <!-- mom -->
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <?php
+                                                    $queryMS = "select count(*) as revenue from excel where date between '2019-12-01' and '2020-01-01' order by l1";
+                                                    $dataMS = mysqli_query($koneksi, $queryMS);
 
-                                                    while($row = mysqli_fetch_assoc($dataYOY)){
+                                                    while ($row = mysqli_fetch_assoc($dataMS)) {
                                                         echo $row['revenue'];
                                                     }
-                                                ?> %
-                                            </td>
-                                        </tr>
-                                        <!-- ytd -->
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                            <?php
-                                                $queryYTD = "select count(*) as revenue from excel where date between '2020-01-01' and '2020-01-31' order by l1";
-                                                $dataYTD = mysqli_query($koneksi,$queryYTD);
+                                                    ?> %
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                    $queryVP = "select count(*) as revenue from excel where date between '2019-12-01' and '2020-01-01' order by l1";
+                                                    $dataVP = mysqli_query($koneksi, $queryVP);
 
-                                                    while($row = mysqli_fetch_assoc($dataYTD)){
+                                                    while ($row = mysqli_fetch_assoc($dataVP)) {
                                                         echo $row['revenue'];
                                                     }
-                                                ?> %
-                                            </td>
-                                            <td>
-                                            <?php
-                                                $queryYTD = "select count(*) as revenue from excel where date between '2020-01-01' and '2020-01-31' order by l1";
-                                                $dataYTD = mysqli_query($koneksi,$queryYTD);
+                                                    ?> %
+                                                </td>
+                                            </tr>
+                                            <!-- yoy -->
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <?php
+                                                    $queryYOY = "select count(*) as revenue from excel where date between '2019-01-01' and '2020-01-01' order by l1";
+                                                    $dataYOY = mysqli_query($koneksi, $queryYOY);
 
-                                                    while($row = mysqli_fetch_assoc($dataYTD)){
+                                                    while ($row = mysqli_fetch_assoc($dataYOY)) {
                                                         echo $row['revenue'];
                                                     }
-                                                ?> %
-                                            </td>
-                                        </tr>
-                                </table>
+                                                    ?> %
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                    $queryYOY = "select count(*) as revenue from excel where date between '2019-01-01' and '2020-01-01' order by l1";
+                                                    $dataYOY = mysqli_query($koneksi, $queryYOY);
+
+                                                    while ($row = mysqli_fetch_assoc($dataYOY)) {
+                                                        echo $row['revenue'];
+                                                    }
+                                                    ?> %
+                                                </td>
+                                            </tr>
+                                            <!-- ytd -->
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <?php
+                                                    $queryYTD = "select count(*) as revenue from excel where date between '2020-01-01' and '2020-01-31' order by l1";
+                                                    $dataYTD = mysqli_query($koneksi, $queryYTD);
+
+                                                    while ($row = mysqli_fetch_assoc($dataYTD)) {
+                                                        echo $row['revenue'];
+                                                    }
+                                                    ?> %
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                    $queryYTD = "select count(*) as revenue from excel where date between '2020-01-01' and '2020-01-31' order by l1";
+                                                    $dataYTD = mysqli_query($koneksi, $queryYTD);
+
+                                                    while ($row = mysqli_fetch_assoc($dataYTD)) {
+                                                        echo $row['revenue'];
+                                                    }
+                                                    ?> %
+                                                </td>
+                                            </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                     <!-- Content Row -->
                     <div class="row">
                         <!-- Area Chart -->
                         <div class="col-xl-8 col-lg-7">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Trending Daily Usage </h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                    </div>
+
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
@@ -466,14 +451,10 @@ require("conf/conn.php");
                         <div class="col-xl-4 col-lg-5">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Pie Chart</h6>
                                     <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
+
                                     </div>
                                 </div>
                                 <!-- Card Body -->
@@ -483,13 +464,13 @@ require("conf/conn.php");
                                     </div>
                                     <div class="mt-4 text-center small">
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Direct
+                                            <i class="fas fa-circle text-primary"></i> Digital Service
                                         </span>
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Social
+                                            <i class="fas fa-circle text-success"></i> BroadBand
                                         </span>
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> Referral
+                                            <i class="fas fa-circle text-info"></i> Voice P2P
                                         </span>
                                     </div>
                                 </div>
@@ -498,16 +479,16 @@ require("conf/conn.php");
 
                         <!-- Bar Chart -->
                         <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Growth Daily Usage</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-bar">
-                                        <canvas id="myBarChart"></canvas>
-                                    </div>
-                                   
-                                </div>
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Growth Daily Usage</h6>
                             </div>
+                            <div class="card-body">
+                                <div class="chart-bar">
+                                    <canvas id="myBarChart"></canvas>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
@@ -535,8 +516,7 @@ require("conf/conn.php");
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
