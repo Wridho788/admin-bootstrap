@@ -169,7 +169,7 @@ require("conf/conn.php");
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
 
                                                 <?php
-                                                $queryMOM = "select count(*) as revenue from excel where date between '2019-12-01' and '2020-01-01'";
+                                                $queryMOM = "select sum(revenue) as revenue from table_name where date between '2020-01-01' and '2020-01-09'";
                                                 $dataMOM = mysqli_query($koneksi, $queryMOM);
 
                                                 while ($row = mysqli_fetch_assoc($dataMOM)) {
