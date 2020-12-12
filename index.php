@@ -140,8 +140,15 @@ require("conf/conn.php");
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Revenue MTD</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"> Rp.
+                                                <?php
+                                                $queryMTD = "select SUM(revenue) as revenue_mtd from excel where date between '2020-01-01' and '2020-01-12'";
+                                                $dataMtD = mysqli_query($koneksi, $queryMTD);
+                                                while ($row = mysqli_fetch_assoc($dataMtD)) {
+                                                    $row['revenue_mtd'];
+                                                    echo number_format($row['revenue_mtd']);
+                                                }
+                                                ?>
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -160,8 +167,28 @@ require("conf/conn.php");
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Growth MoM</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?php
+                                                error_reporting(0);
+                                                $queryLM = "select SUM(revenue) as revenue_mtd from excel where date between '2019-12-01' and '2020-01-01'";
+                                                $dataLM = mysqli_query($koneksi, $queryLM);
+                                                while ($row = mysqli_fetch_assoc($dataLM)) {
+                                                    $row['revenue_mtd'];
+                                                    $hasil_rupiah = " " . number_format($row['revenue_mtd'], 2, ',', '.');
+                                                    $hasil_rupiah;
+                                                }
 
+                                                $queryMTD = "select SUM(revenue) as revenue_mtd from excel where date between '2020-01-01' and '2020-01-12'";
+                                                $dataMtD = mysqli_query($koneksi, $queryMTD);
+                                                while ($row = mysqli_fetch_assoc($dataMtD)) {
+                                                    $row['revenue_mtd'];
+                                                    $hasil_rupiahMTD = " " . number_format($row['revenue_mtd'], 2, ',', '.');
+                                                    $hasil_rupiahMTD;
+                                                }
 
+                                                $queryMoM = ($hasil_rupiah / $hasil_rupiahMTD) - 1 * 100;
+                                                echo $queryMoM;
+                                                ?>
+                                                %
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -180,7 +207,28 @@ require("conf/conn.php");
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Growth YoY</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?php
+                                                error_reporting(0);
+                                                $queryMtd = "select SUM(revenue) as revenue_md from excel where date between '2020-01-01' and '2020-01-12'";
+                                                $datamtd = mysqli_query($koneksi, $queryMtd);
+                                                while ($row = mysqli_fetch_assoc($datamtd)) {
+                                                    $row['revenue_md'];
+                                                    $hasil_rupiahmtd = " " . number_format($row['revenue_md'], 2, ',', '.');
+                                                    $hasil_rupiahmtd;
+                                                }
 
+                                                $queryLY = "select SUM(revenue) as revenue_ly from excel where date between '2019-01-01' and '2019-01-31'";
+                                                $dataLM = mysqli_query($koneksi, $queryLY);
+                                                while ($row = mysqli_fetch_assoc($dataLY)) {
+                                                    $row['revenue_ly'];
+                                                    $hasil_rupiahly = " " . number_format($row['revenue_ly'], 2, ',', '.');
+                                                    $hasil_rupiahly;
+                                                }
+
+                                                $queryYoY = ($hasil_rupiahmtd / $hasil_rupiahly) - 1 * 100;
+                                                echo is_infinite($queryYoY);
+                                                ?>
+                                                %
 
                                             </div>
                                         </div>
@@ -200,8 +248,27 @@ require("conf/conn.php");
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Growth YTD</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?php
+                                                error_reporting(0);
+                                                $queryYtd19 = "select SUM(revenue) as revenue_ytdd from excel where date between '2019-01-01' and '2019-12-12'";
+                                                $dataytd19 = mysqli_query($koneksi, $queryYtd19);
+                                                while ($row = mysqli_fetch_assoc($dataytd19)) {
+                                                    $row['revenue_ytdd'];
+                                                    $hasil_rupiahytd19 = " " . number_format($row['revenue_ytdd'], 2, ',', '.');
+                                                    $hasil_rupiahmtd19;
+                                                }
+                                                $queryYtd20 = "select SUM(revenue) as revenue_ytddd from excel where date between '2020-01-01' and '2020-12-12";
+                                                $dataYtd20 = mysqli_query($koneksi, $queryYtd20);
+                                                while ($row = mysqli_fetch_assoc($dataYtd20)) {
+                                                    $row['revenue_ytddd'];
+                                                    $hasil_rupiahytd20 = " " . number_format($row['revenue_ytddd'], 2, ',', '.');
+                                                    $hasil_rupiahytd20;
+                                                }
 
-
+                                                $queryYtd = ($hasil_rupiahytd19 / $hasil_rupiah20) - 1 * 100;
+                                                echo is_infinite($queryYtd);
+                                                ?>
+                                                %
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -220,8 +287,16 @@ require("conf/conn.php");
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 DU Last Month</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"> Rp.
+                                                <?php
+                                                $queryLM = "select SUM(revenue) as revenue_mtd from excel where date between '2019-12-01' and '2020-01-01'";
+                                                $dataLM = mysqli_query($koneksi, $queryLM);
+                                                while ($row = mysqli_fetch_assoc($dataLM)) {
+                                                    $row['revenue_mtd'];
+                                                    $hasil_rupiah = " " . number_format($row['revenue_mtd'], 2, ',', '.');
+                                                    echo $hasil_rupiah;
+                                                }
 
-                                                B
+                                                ?>
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -241,7 +316,16 @@ require("conf/conn.php");
                                                 DU MTD</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 Rp.
-                                                B
+                                                <?php
+                                                $queryMTD = "select SUM(revenue) as revenue_mtd from excel where date between '2020-01-01' and '2020-01-31'";
+                                                $dataMtD = mysqli_query($koneksi, $queryMTD);
+                                                while ($row = mysqli_fetch_assoc($dataMtD)) {
+                                                    $row['revenue_mtd'];
+                                                    $hasil_rupiah = " " . number_format($row['revenue_mtd'], 2, ',', '.');
+                                                    echo $hasil_rupiah;
+                                                }
+                                                ?>
+
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -281,6 +365,10 @@ require("conf/conn.php");
                             <h6>Select Region</h6>
                             <select class="form-control">
                                 <option>All</option>
+                                <option>SUMBAGUT </option>
+                                <option>SUMBAGTENG</option>
+                                <option>SUMBAGSEL</option>
+
                             </select>
                             <br>
                             <h6>Select L1_Name</h6>
@@ -291,13 +379,8 @@ require("conf/conn.php");
                             </select>
                             <br>
                             <?php
-                            
-                            $queryMTD = "select SUM(revenue) as revenue_mtd from excel where date between '2020-01-01' and '2020-01-11'";
-                            $dataMtD = mysqli_query($koneksi, $queryMTD);
-                            while ($row = mysqli_fetch_assoc($dataMtD)) {
-                                $row['revenue_mtd'];
-                                echo number_format($row['revenue_mtd']);
-                            }
+
+
 
                             ?>
                             <button type="button" class="btn btn-primary">Tampilkan</button>
@@ -338,11 +421,11 @@ require("conf/conn.php");
                                                 <td>
                                                     Rp.
                                                     <?php
-                                                    $querySMS = "select count(*) as revenue from excel where date between '2019-01-01' and '2020-01-31' order by l1";
+                                                    $querySMS = "select SUM(revenue) as revenue_sms from excel where date between '2020-01-01' and '2020-01-12' order by l1";
                                                     $dataSMS = mysqli_query($koneksi, $querySMS);
-
                                                     while ($row = mysqli_fetch_assoc($dataSMS)) {
-                                                        echo $row['revenue'];
+                                                        $row['revenue_sms'];
+                                                        echo number_format($row['revenue_sms']);
                                                     }
                                                     ?>
                                                     B
@@ -350,11 +433,11 @@ require("conf/conn.php");
                                                 <td>
                                                     Rp.
                                                     <?php
-                                                    $queryV = "select count(*) as revenue from excel where date between '2019-01-01' and '2020-01-31' order by l1";
+                                                    $queryV = "select SUM(revenue) as revenue_voice from excel where date between '2020-01-01' and '2020-01-12' order by l1";
                                                     $dataV = mysqli_query($koneksi, $queryV);
-
                                                     while ($row = mysqli_fetch_assoc($dataV)) {
-                                                        echo $row['revenue'];
+                                                        $row['revenue_voice'];
+                                                        echo number_format($row['revenue_voice']);
                                                     }
                                                     ?>
                                                     B
@@ -546,9 +629,19 @@ require("conf/conn.php");
             </div>
         </div>
     </div>
+
+
+
     <script type="text/javascript">
-        // Data Picker Initialization
-        $('.datepicker').datepicker();
+        $(function() {
+            $(".datepicker").datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            });
+        });
+    </script>
+    </script>
     </script>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
