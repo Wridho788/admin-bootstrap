@@ -1,7 +1,5 @@
 <?php
 require("conf/conn.php");
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,20 +17,25 @@ require("conf/conn.php");
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
+    <link href="library/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.17.0/css/mdb.min.css" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
 <body id="page-top">
-
     <!-- Page Wrapper -->
     <div id="wrapper">
-
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
                 <div class="sidebar-brand-icon rotate-n-15">
@@ -40,10 +43,8 @@ require("conf/conn.php");
                 </div>
                 <div class="sidebar-brand-text mx-3">Admin <sup>2</sup></div>
             </a>
-
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="index.php">
@@ -140,15 +141,7 @@ require("conf/conn.php");
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Revenue MTD</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                Rp.
-                                                <?php
-                                                $queryRMTD = "select count(*) as revenue from excel where date between '2020-01-01' and '2020-01-09'";
-                                                $dataMTD = mysqli_query($koneksi, $queryRMTD);
 
-                                                while ($row = mysqli_fetch_assoc($dataMTD)) {
-                                                    echo $row['revenue'];
-                                                }
-                                                ?> B
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -168,14 +161,7 @@ require("conf/conn.php");
                                                 Growth MoM</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
 
-                                                <?php
-                                                $queryMOM = "select sum(revenue) as revenue from table_name where date between '2020-01-01' and '2020-01-09'";
-                                                $dataMOM = mysqli_query($koneksi, $queryMOM);
 
-                                                while ($row = mysqli_fetch_assoc($dataMOM)) {
-                                                    echo $row['revenue'];
-                                                }
-                                                ?> %
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -195,14 +181,7 @@ require("conf/conn.php");
                                                 Growth YoY</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
 
-                                                <?php
-                                                $queryYOY = "select count(*) as revenue from excel where date between '2019-01-01' and '2020-01-01'";
-                                                $dataYOY = mysqli_query($koneksi, $queryYOY);
 
-                                                while ($row = mysqli_fetch_assoc($dataYOY)) {
-                                                    echo $row['revenue'];
-                                                }
-                                                ?> %
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -221,14 +200,8 @@ require("conf/conn.php");
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Growth YTD</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <?php
-                                                $queryYTD = "select count(*) as revenue from excel where date between '2020-01-01' and '2020-01-31'";
-                                                $dataYTD = mysqli_query($koneksi, $queryYTD);
 
-                                                while ($row = mysqli_fetch_assoc($dataYTD)) {
-                                                    echo $row['revenue'];
-                                                }
-                                                ?> %
+
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -247,14 +220,8 @@ require("conf/conn.php");
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 DU Last Month</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"> Rp.
-                                                <?php
-                                                $queryLast = "select count(*) as revenue from excel where date between '2019-12-01' and '2019-12-31'";
-                                                $dataLast = mysqli_query($koneksi, $queryLast);
 
-                                                while ($row = mysqli_fetch_assoc($dataLast)) {
-                                                    echo $row['revenue'];
-                                                }
-                                                ?> B
+                                                B
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -274,14 +241,7 @@ require("conf/conn.php");
                                                 DU MTD</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 Rp.
-                                                <?php
-                                                $queryMTD = "select count(*) as revenue from excel where date between '2020-01-01' and '2020-01-30'";
-                                                $dataMTD = mysqli_query($koneksi, $queryMTD);
-
-                                                while ($row = mysqli_fetch_assoc($dataMTD)) {
-                                                    echo $row['revenue'];
-                                                }
-                                                ?> B
+                                                B
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -291,9 +251,60 @@ require("conf/conn.php");
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
+
+
+                    <div class="row">
+                        <!-- revenue mtd Card Example -->
+                        <div class="container-fluid">
+                            <div id="date-picker-update" class="md-form md-outline input-with-post-icon datepicker">
+                                <input placeholder="Select date" type="text" id="update" class="form-control">
+                                <label for="example">Update Date</label>
+                                <i class="fas fa-calendar input-prefix" tabindex=0></i>
+                            </div>
+                            <div id="date-picker-start" class="md-form md-outline input-with-post-icon datepicker">
+                                <input placeholder="Select date" type="text" id="start" class="form-control">
+                                <label for="example">Start Date</label>
+                                <i class="fas fa-calendar input-prefix" tabindex=0></i>
+                            </div>
+                            <h6>Revenue Type</h6>
+                            <select class="revenue form-control">
+                                <option>L1</option>
+                            </select>
+                            <br>
+                            <h6>Select Area</h6>
+                            <select class="form-control">
+                                <option>All</option>
+
+                            </select>
+                            <br>
+                            <h6>Select Region</h6>
+                            <select class="form-control">
+                                <option>All</option>
+                            </select>
+                            <br>
+                            <h6>Select L1_Name</h6>
+                            <select class="l1 form-control">
+                                <option>All</option>
+                                <option>SMS P2P</option>
+                                <option>Voice P2P</option>
+                            </select>
+                            <br>
+                            <?php
+                            
+                            $queryMTD = "select SUM(revenue) as revenue_mtd from excel where date between '2020-01-01' and '2020-01-11'";
+                            $dataMtD = mysqli_query($koneksi, $queryMTD);
+                            while ($row = mysqli_fetch_assoc($dataMtD)) {
+                                $row['revenue_mtd'];
+                                echo number_format($row['revenue_mtd']);
+                            }
+
+                            ?>
+                            <button type="button" class="btn btn-primary">Tampilkan</button>
+
+                        </div>
+                    </div>
+                    <br>
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
 
@@ -429,6 +440,8 @@ require("conf/conn.php");
                             </div>
                         </div>
                     </div>
+
+
                     <!-- Content Row -->
                     <div class="row">
                         <!-- Area Chart -->
@@ -533,7 +546,10 @@ require("conf/conn.php");
             </div>
         </div>
     </div>
-
+    <script type="text/javascript">
+        // Data Picker Initialization
+        $('.datepicker').datepicker();
+    </script>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -551,6 +567,16 @@ require("conf/conn.php");
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
     <script src="js/demo/chart-bar-demo.js"></script>
+    <script src="js/custom.js"></script>
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.17.0/js/mdb.min.js"></script>
 
 </body>
 
