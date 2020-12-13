@@ -421,11 +421,12 @@ require("conf/conn.php");
                                                 <td>
                                                     Rp.
                                                     <?php
-                                                    $querySMS = "select SUM(revenue) as revenue_sms from excel where date between '2020-01-01' and '2020-01-12' order by l1";
+                                                    $querySMS = "SELECT SUM(excel.revenue) as revenue_sms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-14'";
                                                     $dataSMS = mysqli_query($koneksi, $querySMS);
                                                     while ($row = mysqli_fetch_assoc($dataSMS)) {
                                                         $row['revenue_sms'];
-                                                        echo number_format($row['revenue_sms']);
+                                                        $hasil_rupiah = " " . number_format($row['revenue_sms'], 2, ',', '.');
+                                                        echo $hasil_rupiah;
                                                     }
                                                     ?>
                                                     B
@@ -433,7 +434,7 @@ require("conf/conn.php");
                                                 <td>
                                                     Rp.
                                                     <?php
-                                                    $queryV = "select SUM(revenue) as revenue_voice from excel where date between '2020-01-01' and '2020-01-12' order by l1";
+                                                    $queryV = "SELECT SUM(excel.revenue) as revenue_voice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-14'";
                                                     $dataV = mysqli_query($koneksi, $queryV);
                                                     while ($row = mysqli_fetch_assoc($dataV)) {
                                                         $row['revenue_voice'];

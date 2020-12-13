@@ -64,14 +64,24 @@ $updateTgl = date("Y-m-d");
     <thead>
         <tr>
             <th>
-                MoM
+                l1 - sms p2p
             </th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>
-
+                Rp.
+                <?php
+                $querySMS = "select excel.l1, excel.date, excel.revenue from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-14' = (SELECT SUM(revenue) as revenue_sms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-14')";
+                $dataSMS = mysqli_query($koneksi, $querySMS);
+                while ($row = mysqli_fetch_assoc($dataSMS)) {
+                    $row['revenue_sms'];
+                    $hasil_rupiah = " " . number_format($row['revenue_sms'], 2, ',', '.');
+                    echo $hasil_rupiah;
+                }
+                ?>
+                B
             </td>
         </tr>
     </tbody>
