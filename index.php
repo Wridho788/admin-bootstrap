@@ -11,9 +11,6 @@ require("conf/conn.php");
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>Admin - Dashboard</title>
-
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -28,6 +25,13 @@ require("conf/conn.php");
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.17.0/css/mdb.min.css" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- datepicker -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/datepicker.css">
+
+    <title>Admin - Dashboard</title>
+
 
 </head>
 
@@ -188,7 +192,7 @@ require("conf/conn.php");
                                                 }
 
                                                 $queryMoM = (($hasil_rupiahMTD / $hasil_rupiahlm - 1) * 100);
-                                                echo round($queryMoM,1);
+                                                echo round($queryMoM, 1);
                                                 ?>
                                                 %
                                             </div>
@@ -251,7 +255,7 @@ require("conf/conn.php");
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 <?php
                                                 error_reporting(0);
-                                               
+
                                                 $queryYtd19 = "SELECT SUM(revenue) as revenue_ytdd from excel where excel.date between '2019-01-01' and '2019-12-14'";
                                                 $dataytd19 = mysqli_query($koneksi, $queryYtd19);
                                                 while ($row = mysqli_fetch_assoc($dataytd19)) {
@@ -344,15 +348,13 @@ require("conf/conn.php");
                     <div class="row">
                         <!-- revenue mtd Card Example -->
                         <div class="container-fluid">
-                            <div id="date-picker-update" class="md-form md-outline input-with-post-icon datepicker">
-                                <input placeholder="Select date" type="text" id="update" class="form-control">
-                                <label for="example">Update Date</label>
-                                <i class="fas fa-calendar input-prefix" tabindex=0></i>
+                            <div class="form-group">
+                                <label>Update date:</label>
+                                <input type="text" name="update-date" class="form-control datepicker" required />
                             </div>
-                            <div id="date-picker-start" class="md-form md-outline input-with-post-icon datepicker">
-                                <input placeholder="Select date" type="text" id="start" class="form-control">
-                                <label for="example">Start Date</label>
-                                <i class="fas fa-calendar input-prefix" tabindex=0></i>
+                            <div class="form-group">
+                                <label>Start date:</label>
+                                <input type="text" name="tanggal" class="form-control datepicker-startdate" required />
                             </div>
                             <h6>Revenue Type</h6>
                             <select class="revenue form-control">
@@ -470,8 +472,8 @@ require("conf/conn.php");
                                                         $hasil_rupiahMTDsms;
                                                     }
                                                     $queryMoMsms = (($hasil_rupiahMTDsms / $hasil_rupiahlmsms - 1) * 100);
-                                                    echo round($queryMoMsms,1);
-                                                    
+                                                    echo round($queryMoMsms, 1);
+
                                                     ?> %
                                                 </td>
                                                 <td>
@@ -492,7 +494,7 @@ require("conf/conn.php");
                                                         $hasil_rupiahMTDvoice;
                                                     }
                                                     $queryMoMvoice = (($hasil_rupiahMTDvoice / $hasil_rupiahlmvoice - 1) * 100);
-                                                    echo round($queryMoMvoice,1);
+                                                    echo round($queryMoMvoice, 1);
 
                                                     ?> %
                                                 </td>
@@ -520,7 +522,7 @@ require("conf/conn.php");
                                                         $hasil_rupiahlysms;
                                                     }
                                                     $queryYoYsms = (($hasil_rupiahmtdsms / $hasil_rupiahlysms - 1) * 100);
-                                                    echo round($queryYoYsms,1);
+                                                    echo round($queryYoYsms, 1);
                                                     ?>
                                                     %
                                                 </td>
@@ -543,8 +545,8 @@ require("conf/conn.php");
                                                         $hasil_rupiahlyvoice;
                                                     }
 
-                                                    $queryYoYvoice = (($hasil_rupiahmtdvoice / $hasil_rupiahlyvoice - 1)* 100);
-                                                    echo round($queryYoYvoice,1);
+                                                    $queryYoYvoice = (($hasil_rupiahmtdvoice / $hasil_rupiahlyvoice - 1) * 100);
+                                                    echo round($queryYoYvoice, 1);
                                                     ?>
                                                     %
                                                 </td>
@@ -603,8 +605,6 @@ require("conf/conn.php");
                             </div>
                         </div>
                     </div>
-
-
                     <!-- Content Row -->
                     <div class="row">
                         <!-- Area Chart -->
@@ -721,8 +721,8 @@ require("conf/conn.php");
             });
         });
     </script>
-    </script>
-    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
