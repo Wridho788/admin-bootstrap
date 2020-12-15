@@ -15,7 +15,7 @@ class Model_model {
     }
 
     function filterbybulan($tahun, $bulanawal, $bulanakhir){
-        $query = $this->koneksi->query("SELECT * FROM excel where YEAR(revenue) ");
+        $query = $this->koneksi->query("SELECT * FROM excel where YEAR(revenue)");
     }
 }
 

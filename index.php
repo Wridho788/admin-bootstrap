@@ -146,12 +146,12 @@ require("conf/conn.php");
                                                 Revenue MTD</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"> Rp.
                                                 <?php
-                                                $queryMTD = "SELECT SUM(revenue) as revenue_mtd from excel where excel.date between '2020-01-01' and '2020-01-14'";
+                                                $queryMTD = "SELECT SUM(revenue) as revenue_mtd from excel where excel.date between '2020-01-01' and '2020-01-15'";
                                                 $dataMtD = mysqli_query($koneksi, $queryMTD);
                                                 while ($row = mysqli_fetch_assoc($dataMtD)) {
                                                     $row['revenue_mtd'];
                                                     $hasil_rupiah = " " . number_format($row['revenue_mtd'], 2, ',', '.');
-                                                    echo $hasil_rupiah;
+                                                    echo round($hasil_rupiah,2);
                                                 }
                                                 ?>
                                             </div>
@@ -175,7 +175,7 @@ require("conf/conn.php");
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 <?php
                                                 error_reporting(0);
-                                                $queryreMTD = "SELECT SUM(revenue) as revenue_remtd from excel where excel.date BETWEEN '2020-01-01' and '2020-01-14'";
+                                                $queryreMTD = "SELECT SUM(revenue) as revenue_remtd from excel where excel.date BETWEEN '2020-01-01' and '2020-01-15'";
                                                 $datareMtD = mysqli_query($koneksi, $queryreMTD);
                                                 while ($row = mysqli_fetch_assoc($datareMtD)) {
                                                     $row['revenue_remtd'];
@@ -183,7 +183,7 @@ require("conf/conn.php");
                                                     $hasil_rupiahMTD;
                                                 }
 
-                                                $queryreLM = "SELECT SUM(revenue) as revenue_relm from excel where excel.date BETWEEN '2019-12-01' and '2019-12-14'";
+                                                $queryreLM = "SELECT SUM(revenue) as revenue_relm from excel where excel.date BETWEEN '2019-12-01' and '2019-12-15'";
                                                 $datareLM = mysqli_query($koneksi, $queryreLM);
                                                 while ($row = mysqli_fetch_assoc($datareLM)) {
                                                     $row['revenue_relm'];
@@ -215,7 +215,7 @@ require("conf/conn.php");
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 <?php
                                                 error_reporting(0);
-                                                $queryMtd = "SELECT SUM(revenue) as revenue_md from excel where excel.date BETWEEN '2020-01-01' and '2020-01-14'";
+                                                $queryMtd = "SELECT SUM(revenue) as revenue_md from excel where excel.date BETWEEN '2020-01-01' and '2020-01-15'";
                                                 $datamtd = mysqli_query($koneksi, $queryMtd);
                                                 while ($rowmtd = mysqli_fetch_assoc($datamtd)) {
                                                     $rowmtd['revenue_md'];
@@ -223,7 +223,7 @@ require("conf/conn.php");
                                                     $hasil_rupiahmtd;
                                                 }
 
-                                                $queryLY = "SELECT SUM(revenue) as revenue_ly from excel where excel.date BETWEEN '2019-01-01' and '2019-01-14'";
+                                                $queryLY = "SELECT SUM(revenue) as revenue_ly from excel where excel.date BETWEEN '2019-01-01' and '2019-01-15'";
                                                 $dataLY = mysqli_query($koneksi, $queryLY);
                                                 while ($rowly = mysqli_fetch_assoc($dataLY)) {
                                                     $rowly['revenue_ly'];
@@ -244,47 +244,7 @@ require("conf/conn.php");
                                 </div>
                             </div>
                         </div>
-                        <!-- growth YTD Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Growth YTD</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <?php
-                                                error_reporting(0);
-
-                                                $queryYtd19 = "SELECT SUM(revenue) as revenue_ytdd from excel where excel.date between '2019-01-01' and '2019-12-14'";
-                                                $dataytd19 = mysqli_query($koneksi, $queryYtd19);
-                                                while ($row = mysqli_fetch_assoc($dataytd19)) {
-                                                    $row['revenue_ytdd'];
-                                                    $hasil_rupiahytd19 = " " . number_format($row['revenue_ytdd'], 2, ',', '.');
-                                                    $hasil_rupiahytd19;
-                                                }
-
-                                                $queryYtd20 = "SELECT SUM(revenue) as revenue_ytddd from excel where excel.date between '2020-01-01' and '2020-01-14'";
-                                                $dataYtd20 = mysqli_query($koneksi, $queryYtd20);
-                                                while ($row = mysqli_fetch_assoc($dataYtd20)) {
-                                                    $row['revenue_ytddd'];
-                                                    $hasil_rupiahytd20 = " " . number_format($row['revenue_ytddd'], 2, ',', '.');
-                                                    $hasil_rupiahytd20;
-                                                }
-
-                                                $queryYtd = ($hasil_rupiahytd20 / $hasil_rupiahytd19 - 1) * 100;
-                                                echo round($queryYtd, 2);
-                                                ?>
-                                                %
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                      
                         <!-- DU Last Month Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
@@ -295,12 +255,12 @@ require("conf/conn.php");
                                                 DU Last Month</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"> Rp.
                                                 <?php
-                                                $queryduLM = "SELECT SUM(revenue) as revenue_lm from excel where excel.date between '2019-12-01' and '2019-12-14'";
+                                                $queryduLM = "SELECT SUM(revenue) as revenue_lm from excel where excel.date between '2019-12-01' and '2019-12-15'";
                                                 $dataduLM = mysqli_query($koneksi, $queryduLM);
                                                 while ($rowlm = mysqli_fetch_assoc($dataduLM)) {
                                                     $rowlm['revenue_lm'];
                                                     $hasil_rupiah = " " . number_format($rowlm['revenue_lm'], 2, ',', '.');
-                                                    echo $hasil_rupiah;
+                                                    echo round($hasil_rupiah,2);
                                                 }
 
                                                 ?>
@@ -324,13 +284,21 @@ require("conf/conn.php");
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 Rp.
                                                 <?php
-                                                $queryduMTD = "SELECT Avg(revenue) as revenue_mtd from excel where excel.date between '2020-01-01' and '2020-01-14'";
+                                                $queryduMTD = "SELECT SUM(revenue) as revenue_mtd from excel where excel.date between '2020-01-01' and '2020-01-15'";
                                                 $dataduMtD = mysqli_query($koneksi, $queryduMTD);
                                                 while ($row = mysqli_fetch_assoc($dataduMtD)) {
                                                     $row['revenue_mtd'];
-                                                    $hasil_rupiah = " " . number_format($row['revenue_mtd'], 2, ',', '.');
-                                                    echo $hasil_rupiah;
+                                                    $hasil_rupiahdumtd = " " . number_format($row['revenue_mtd'], 2, ',', '.');
+                                                    $hasildu = round($hasil_rupiahdumtd);
+                                                // $queryduMTD = "SELECT Avg(revenue) as revenue_mtd from excel where excel.date between '2020-01-01' and '2020-01-15'";
+                                                // $dataduMtD = mysqli_query($koneksi, $queryduMTD);
+                                                // while ($row = mysqli_fetch_assoc($dataduMtD)) {
+                                                //     $row['revenue_mtd'];
+                                                //     $hasil_rupiah = " " . number_format($row['revenue_mtd'], 2, ',', '.');
+                                                //     echo $hasil_rupiah;
                                                 }
+                                                $duMtd = $hasildu / 15;
+                                                echo round($duMtd,2);
                                                 ?>
 
                                             </div>
@@ -426,7 +394,7 @@ require("conf/conn.php");
                                                 <td>
                                                     Rp.
                                                     <?php
-                                                    $querySMS = "SELECT SUM(excel.revenue) as revenue_sms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-14'";
+                                                    $querySMS = "SELECT SUM(excel.revenue) as revenue_sms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-15'";
                                                     $dataSMS = mysqli_query($koneksi, $querySMS);
                                                     while ($row = mysqli_fetch_assoc($dataSMS)) {
                                                         $row['revenue_sms'];
@@ -439,7 +407,7 @@ require("conf/conn.php");
                                                 <td>
                                                     Rp.
                                                     <?php
-                                                    $queryV = "SELECT SUM(excel.revenue) as revenue_voice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-14'";
+                                                    $queryV = "SELECT SUM(excel.revenue) as revenue_voice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-15'";
                                                     $dataV = mysqli_query($koneksi, $queryV);
                                                     while ($row = mysqli_fetch_assoc($dataV)) {
                                                         $row['revenue_voice'];
@@ -456,7 +424,7 @@ require("conf/conn.php");
                                                 <td>
                                                     <?php
                                                     error_reporting(0);
-                                                    $queryLMSMS = "SELECT SUM(excel.revenue) as revenue_lmsms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2019-12-01' and '2019-12-14'";
+                                                    $queryLMSMS = "SELECT SUM(excel.revenue) as revenue_lmsms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2019-12-01' and '2019-12-15'";
                                                     $dataLMSMS = mysqli_query($koneksi, $queryLMSMS);
                                                     while ($row = mysqli_fetch_assoc($dataLMSMS)) {
                                                         $row['revenue_lmsms'];
@@ -464,7 +432,7 @@ require("conf/conn.php");
                                                         $hasil_rupiahlmsms;
                                                     }
 
-                                                    $queryMTDSMS = "SELECT SUM(excel.revenue) as revenue_mtdsms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-14'";
+                                                    $queryMTDSMS = "SELECT SUM(excel.revenue) as revenue_mtdsms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-15'";
                                                     $dataMtDsms = mysqli_query($koneksi, $queryMTDSMS);
                                                     while ($row = mysqli_fetch_assoc($dataMtDsms)) {
                                                         $row['revenue_mtdsms'];
@@ -479,14 +447,14 @@ require("conf/conn.php");
                                                 <td>
                                                     <?php
                                                     error_reporting(0);
-                                                    $queryLMVOICE = "SELECT SUM(excel.revenue) as revenue_lmvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2019-12-01' and '2019-12-14'";
+                                                    $queryLMVOICE = "SELECT SUM(excel.revenue) as revenue_lmvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2019-12-01' and '2019-12-15'";
                                                     $dataLMVOICE = mysqli_query($koneksi, $queryLMVOICE);
                                                     while ($row = mysqli_fetch_assoc($dataLMVOICE)) {
                                                         $row['revenue_lmvoice'];
                                                         $hasil_rupiahlmvoice = " " . number_format($row['revenue_lmvoice'], 2, ',', '.');
                                                         $hasil_rupiahlmvoice;
                                                     }
-                                                    $queryMTDVOICE = "SELECT SUM(excel.revenue) as revenue_mtdvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-14'";
+                                                    $queryMTDVOICE = "SELECT SUM(excel.revenue) as revenue_mtdvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-15'";
                                                     $dataMtDvoice = mysqli_query($koneksi, $queryMTDVOICE);
                                                     while ($row = mysqli_fetch_assoc($dataMtDvoice)) {
                                                         $row['revenue_mtdvoice'];
@@ -506,7 +474,7 @@ require("conf/conn.php");
                                                 <td>
                                                     <?php
                                                     error_reporting(0);
-                                                    $queryMTDsms = "SELECT SUM(revenue) as revenue_mtdsms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-14'";
+                                                    $queryMTDsms = "SELECT SUM(revenue) as revenue_mtdsms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-15'";
                                                     $dataMTDsms = mysqli_query($koneksi, $queryMTDsms);
                                                     while ($rowmtdsms = mysqli_fetch_assoc($dataMTDsms)) {
                                                         $rowmtdsms['revenue_mtdsms'];
@@ -514,7 +482,7 @@ require("conf/conn.php");
                                                         $hasil_rupiahmtdsms;
                                                     }
 
-                                                    $queryLYsms = "SELECT SUM(revenue) as revenue_lysms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2019-01-01' and '2019-01-14'";
+                                                    $queryLYsms = "SELECT SUM(revenue) as revenue_lysms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2019-01-01' and '2019-01-15'";
                                                     $dataLYsms = mysqli_query($koneksi, $queryLYsms);
                                                     while ($row = mysqli_fetch_assoc($dataLYsms)) {
                                                         $row['revenue_lysms'];
@@ -529,7 +497,7 @@ require("conf/conn.php");
                                                 <td>
                                                     <?php
                                                     error_reporting(0);
-                                                    $queryMtdvoice = "SELECT SUM(excel.revenue) as revenue_mdvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-14'";
+                                                    $queryMtdvoice = "SELECT SUM(excel.revenue) as revenue_mdvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-15'";
                                                     $dataMtDvoice = mysqli_query($koneksi, $queryMtdvoice);
                                                     while ($row = mysqli_fetch_assoc($dataMtDvoice)) {
                                                         $row['revenue_mdvoice'];
@@ -537,7 +505,7 @@ require("conf/conn.php");
                                                         $hasil_rupiahmtdvoice;
                                                     }
 
-                                                    $queryLYvoice = "SELECT SUM(excel.revenue) as revenue_lyvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2019-01-01' and '2019-01-14'";
+                                                    $queryLYvoice = "SELECT SUM(excel.revenue) as revenue_lyvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2019-01-01' and '2019-01-15'";
                                                     $dataLYvoice = mysqli_query($koneksi, $queryLYvoice);
                                                     while ($row = mysqli_fetch_assoc($dataLYvoice)) {
                                                         $row['revenue_lyvoice'];
@@ -551,55 +519,7 @@ require("conf/conn.php");
                                                     %
                                                 </td>
                                             </tr>
-                                            <!-- ytd -->
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td>
-                                                    <?php
-                                                    error_reporting(0);
-                                                    $queryYtd19sms = "SELECT SUM(revenue) as revenue_ytddsms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date between '2019-01-01' and '2019-12-14'";
-                                                    $dataytd19sms = mysqli_query($koneksi, $queryYtd19sms);
-                                                    while ($row = mysqli_fetch_assoc($dataytd19sms)) {
-                                                        $row['revenue_ytddsms'];
-                                                        $hasil_rupiahytd19sms = " " . number_format($row['revenue_ytddsms'], 2, ',', '.');
-                                                        $hasil_rupiahytd19sms;
-                                                    }
-                                                    $queryYtd20sms = "SELECT SUM(revenue) as revenue_ytdddsms from excel WHERE excel.l1 = 'SMS P2P' AND  excel.date between '2020-01-01' and '2020-12-14'";
-                                                    $dataYtd20sms = mysqli_query($koneksi, $queryYtd20sms);
-                                                    while ($row = mysqli_fetch_assoc($dataYtd20sms)) {
-                                                        $row['revenue_ytdddsms'];
-                                                        $hasil_rupiahytd20sms = " " . number_format($row['revenue_ytdddsms'], 2, ',', '.');
-                                                        $hasil_rupiahytd20sms;
-                                                    }
-                                                    $queryYtdsms = round($hasil_rupiahytd20sms / $hasil_rupiahytd19sms - 1 * 100);
-                                                    echo is_infinite($queryYtdsms);
-                                                    ?>
-                                                    %
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                    error_reporting(0);
-                                                    $queryYtd19voice = "SELECT SUM(revenue) as revenue_ytddvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date between '2019-01-01' and '2019-12-14'";
-                                                    $dataytd19voice = mysqli_query($koneksi, $queryYtd19voice);
-                                                    while ($row = mysqli_fetch_assoc($dataytd19voice)) {
-                                                        $row['revenue_ytddvoice'];
-                                                        $hasil_rupiahytd19voice = " " . number_format($row['revenue_ytddvoice'], 2, ',', '.');
-                                                        $hasil_rupiahytd19voice;
-                                                    }
-                                                    $queryYtd20voice = "SELECT SUM(revenue) as revenue_ytdddvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date between '2020-01-01' and '2020-12-14'";
-                                                    $dataYtd20voice = mysqli_query($koneksi, $queryYtd20voice);
-                                                    while ($row = mysqli_fetch_assoc($dataYtd20voice)) {
-                                                        $row['revenue_ytdddvoice'];
-                                                        $hasil_rupiahytd20voice = " " . number_format($row['revenue_ytdddvoice'], 2, ',', '.');
-                                                        $hasil_rupiahytd20voice;
-                                                    }
-                                                    $queryYtdvoice = round($hasil_rupiahytd20voice / $hasil_rupiahytd19voice - 1 * 100);
-                                                    echo is_infinite($queryYtdvoice);
-                                                    ?>
-                                                    %
-                                                </td>
-                                            </tr>
+                                           
                                     </table>
                                 </div>
                             </div>
