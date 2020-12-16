@@ -25,10 +25,13 @@ require("conf/conn.php");
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.17.0/css/mdb.min.css" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Datepicker -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- Datatables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-flash-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.css" />
 
-    <!-- datepicker -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/datepicker.css">
 
     <title>Admin - Dashboard</title>
 
@@ -144,17 +147,30 @@ require("conf/conn.php");
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Revenue MTD</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"> Rp.
-                                                <?php
-                                                $queryMTD = "SELECT SUM(revenue) as revenue_mtd from excel where excel.date between '2020-01-01' and '2020-01-16'";
-                                                $dataMtD = mysqli_query($koneksi, $queryMTD);
-                                                while ($row = mysqli_fetch_assoc($dataMtD)) {
-                                                    $row['revenue_mtd'];
-                                                    $hasil_rupiah = " " . number_format($row['revenue_mtd'], 2, ',', '.');
-                                                    echo round($hasil_rupiah,2);
-                                                }
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            <?php 
+ 
+                                            if(isset($_GET['tanggal'])){
+                                                $tgl = $_GET['tanggal'];
+                                                $tgl2 = $_GET['tanggal2'];
+                                                $sql = mysqli_query($koneksi,"SELECT SUM(revenue) as revenue_mtd from excel where date between '$tgl' and '$tgl2'");
+                                                
+                                            }else{
+                                                $sql = mysqli_query($koneksi,"SELECT * from excel");
+                                            }
+                                            
+                                            while($data = mysqli_fetch_array($sql)){
+                                            ?> Rp. 
+                                           
+                                            <?php 
+                                                $data['revenue_mtd']; 
+                                                $hasil_rupiah = " " . number_format($data['revenue_mtd'], 2, ',', '.');
+                                                echo round($hasil_rupiah,2);
                                                 ?>
-                                                B
+                                            B
+                                            <?php 
+                                                }
+                                            ?>
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -245,7 +261,7 @@ require("conf/conn.php");
                                 </div>
                             </div>
                         </div>
-                      
+
                         <!-- DU Last Month Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
@@ -261,7 +277,7 @@ require("conf/conn.php");
                                                 while ($rowlm = mysqli_fetch_assoc($dataduLM)) {
                                                     $rowlm['revenue_lm'];
                                                     $hasil_rupiah = " " . number_format($rowlm['revenue_lm'], 2, ',', '.');
-                                                    echo round($hasil_rupiah,2);
+                                                    echo round($hasil_rupiah, 2);
                                                 }
 
                                                 ?>
@@ -292,15 +308,15 @@ require("conf/conn.php");
                                                     $row['revenue_mtd'];
                                                     $hasil_rupiahdumtd = " " . number_format($row['revenue_mtd'], 2, ',', '.');
                                                     $hasildu = round($hasil_rupiahdumtd);
-                                                // $queryduMTD = "SELECT Avg(revenue) as revenue_mtd from excel where excel.date between '2020-01-01' and '2020-01-16'";
-                                                // $dataduMtD = mysqli_query($koneksi, $queryduMTD);
-                                                // while ($row = mysqli_fetch_assoc($dataduMtD)) {
-                                                //     $row['revenue_mtd'];
-                                                //     $hasil_rupiah = " " . number_format($row['revenue_mtd'], 2, ',', '.');
-                                                //     echo $hasil_rupiah;
+                                                    // $queryduMTD = "SELECT Avg(revenue) as revenue_mtd from excel where excel.date between '2020-01-01' and '2020-01-16'";
+                                                    // $dataduMtD = mysqli_query($koneksi, $queryduMTD);
+                                                    // while ($row = mysqli_fetch_assoc($dataduMtD)) {
+                                                    //     $row['revenue_mtd'];
+                                                    //     $hasil_rupiah = " " . number_format($row['revenue_mtd'], 2, ',', '.');
+                                                    //     echo $hasil_rupiah;
                                                 }
                                                 $duMtd = $hasildu / 16;
-                                                echo round($duMtd,2);
+                                                echo round($duMtd, 2);
                                                 ?>
                                                 B
                                             </div>
@@ -318,14 +334,14 @@ require("conf/conn.php");
                     <div class="row">
                         <!-- revenue mtd Card Example -->
                         <div class="container-fluid">
+                            
                             <div class="form-group">
-                                <label>Update date:</label>
-                                <input type="text" name="update-date" class="form-control datepicker" required />
-                            </div>
-                            <div class="form-group">
-                                <label>Start date:</label>
-                                <input type="text" name="tanggal" class="form-control datepicker-startdate" required />
-                            </div>
+                            <form method="get">
+                                <label>Update Date:</label>
+                                <input type="date" name="tanggal" class="form-control datepicker">
+                                <label>Start Date:</label>
+                                <input type="date" name="tanggal2" class="form-control datepicker">
+                           
                             <h6>Revenue Type</h6>
                             <select class="revenue form-control">
                                 <option>L1</option>
@@ -353,14 +369,11 @@ require("conf/conn.php");
                                 <option>Voice P2P</option>
                             </select>
                             <br>
-                            <?php
-
-
-
-                            ?>
-                            <button type="button" class="btn btn-primary">Tampilkan</button>
-
-                        </div>
+                            <button type="submit" class="btn btn-primary" value="FILTER">Tampilkan</button>
+                            
+                            </form>
+                            
+                            </div>
                     </div>
                     <br>
                     <!-- Begin Page Content -->
@@ -521,13 +534,13 @@ require("conf/conn.php");
                                                     %
                                                 </td>
                                             </tr>
-                                           
+
                                     </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Content Row -->
+                    <!-- Content Row - chart -->
                     <div class="row">
                         <!-- Area Chart -->
                         <div class="col-xl-8 col-lg-7">
