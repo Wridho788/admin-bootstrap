@@ -148,29 +148,28 @@ require("conf/conn.php");
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Revenue MTD</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <?php 
- 
-                                            if(isset($_GET['tanggal'])){
-                                                $tgl = $_GET['tanggal'];
-                                                $tgl2 = $_GET['tanggal2'];
-                                                $sql = mysqli_query($koneksi,"SELECT SUM(revenue) as revenue_mtd from excel where date between '$tgl' and '$tgl2'");
-                                                
-                                            }else{
-                                                $sql = mysqli_query($koneksi,"SELECT * from excel");
-                                            }
-                                            
-                                            while($data = mysqli_fetch_array($sql)){
-                                            ?> Rp. 
-                                           
-                                            <?php 
-                                                $data['revenue_mtd']; 
-                                                $hasil_rupiah = " " . number_format($data['revenue_mtd'], 2, ',', '.');
-                                                echo round($hasil_rupiah,2);
-                                                ?>
-                                            B
-                                            <?php 
+                                                <?php
+                                                if (isset($_GET['tanggal'])) {
+                                                    $tgl = $_GET['tanggal'];
+                                                    $tgl2 = $_GET['tanggal2'];
+                                                    $sql = mysqli_query($koneksi, "SELECT SUM(revenue) as revenue_mtd from excel where date between '$tgl' and '$tgl2'");
+                                                } else {
+                                                    $sql = mysqli_query($koneksi, "SELECT * from excel");
                                                 }
-                                            ?>
+                                                $datamtd = '';
+                                                while ($datamtd = mysqli_fetch_assoc($sql)) {
+                                                    $datamtd['revenue_mtd'];
+
+                                                ?> Rp.
+
+                                                    <?php
+                                                    $hasil_rupiah = " " . number_format($datamtd['revenue_mtd'], 2, ',', '.');
+                                                    echo round($hasil_rupiah, 2);
+                                                    ?>
+                                                    B
+                                                <?php
+                                                }
+                                                ?>
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -190,6 +189,8 @@ require("conf/conn.php");
                                                 Growth MoM</div>
                                             <!-- perbaiki MoM -->
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
+
+                                            
                                                 <?php
                                                 error_reporting(0);
                                                 $queryreMTD = "SELECT SUM(revenue) as revenue_remtd from excel where excel.date BETWEEN '2020-01-01' and '2020-01-16'";
@@ -199,7 +200,6 @@ require("conf/conn.php");
                                                     $hasil_rupiahMTD = " " . number_format($row['revenue_remtd'], 2, ',', '.');
                                                     $hasil_rupiahMTD;
                                                 }
-
                                                 $queryreLM = "SELECT SUM(revenue) as revenue_relm from excel where excel.date BETWEEN '2019-12-01' and '2019-12-16'";
                                                 $datareLM = mysqli_query($koneksi, $queryreLM);
                                                 while ($row = mysqli_fetch_assoc($datareLM)) {
@@ -207,7 +207,6 @@ require("conf/conn.php");
                                                     $hasil_rupiahlm = " " . number_format($row['revenue_relm'], 2, ',', '.');
                                                     $hasil_rupiahlm;
                                                 }
-
                                                 $queryMoM = (($hasil_rupiahMTD / $hasil_rupiahlm - 1) * 100);
                                                 echo round($queryMoM, 1);
                                                 ?>
@@ -334,357 +333,357 @@ require("conf/conn.php");
                     <div class="row">
                         <!-- revenue mtd Card Example -->
                         <div class="container-fluid">
-                            
+
                             <div class="form-group">
-                            <form method="get">
-                                <label>Update Date:</label>
-                                <input type="date" name="tanggal" class="form-control datepicker">
-                                <label>Start Date:</label>
-                                <input type="date" name="tanggal2" class="form-control datepicker">
-                           
-                            <h6>Revenue Type</h6>
-                            <select class="revenue form-control">
-                                <option>L1</option>
-                            </select>
-                            <br>
-                            <h6>Select Area</h6>
-                            <select class="form-control">
-                                <option>All</option>
+                                <form method="get">
+                                    <label>Update Date:</label>
+                                    <input type="date" name="tanggal" class="form-control datepicker">
+                                    <label>Start Date:</label>
+                                    <input type="date" name="tanggal2" class="form-control datepicker">
 
-                            </select>
-                            <br>
-                            <h6>Select Region</h6>
-                            <select class="form-control">
-                                <option>All</option>
-                                <option>SUMBAGUT </option>
-                                <option>SUMBAGTENG</option>
-                                <option>SUMBAGSEL</option>
+                                    <h6>Revenue Type</h6>
+                                    <select class="revenue form-control">
+                                        <option>L1</option>
+                                    </select>
+                                    <br>
+                                    <h6>Select Area</h6>
+                                    <select class="form-control">
+                                        <option>All</option>
 
-                            </select>
-                            <br>
-                            <h6>Select L1_Name</h6>
-                            <select class="l1 form-control">
-                                <option>All</option>
-                                <option>SMS P2P</option>
-                                <option>Voice P2P</option>
-                            </select>
-                            <br>
-                            <button type="submit" class="btn btn-primary" value="FILTER">Tampilkan</button>
-                            
-                            </form>
-                            
-                            </div>
-                    </div>
-                    <br>
-                    <!-- Begin Page Content -->
-                    <div class="container-fluid">
+                                    </select>
+                                    <br>
+                                    <h6>Select Region</h6>
+                                    <select class="form-control">
+                                        <option>All</option>
+                                        <option>SUMBAGUT </option>
+                                        <option>SUMBAGTENG</option>
+                                        <option>SUMBAGSEL</option>
 
-                        <!-- DataTales Example -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">L1 Data Table</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>BroadBand</th>
-                                                <th>Digital Services</th>
-                                                <th>SMS P2P</th>
-                                                <th>Voice P2P</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Revenue MTD</td>
-                                                <td>Revenue MTD</td>
-                                                <td>Revenue MTD</td>
-                                                <td>Revenue MTD</td>
-                                            </tr>
-                                            <!-- revenue mtd -->
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td>
-                                                    Rp.
-                                                    <?php
-                                                    $querySMS = "SELECT SUM(excel.revenue) as revenue_sms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-16'";
-                                                    $dataSMS = mysqli_query($koneksi, $querySMS);
-                                                    while ($row = mysqli_fetch_assoc($dataSMS)) {
-                                                        $row['revenue_sms'];
-                                                        $hasil_rupiah = " " . number_format($row['revenue_sms'], 2, ',', '.');
-                                                        echo $hasil_rupiah;
-                                                    }
-                                                    ?>
-                                                    B
-                                                </td>
-                                                <td>
-                                                    Rp.
-                                                    <?php
-                                                    $queryV = "SELECT SUM(excel.revenue) as revenue_voice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-16'";
-                                                    $dataV = mysqli_query($koneksi, $queryV);
-                                                    while ($row = mysqli_fetch_assoc($dataV)) {
-                                                        $row['revenue_voice'];
-                                                        echo number_format($row['revenue_voice']);
-                                                    }
-                                                    ?>
-                                                    B
-                                                </td>
-                                            </tr>
-                                            <!-- mom -->
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td>
-                                                    <?php
-                                                    error_reporting(0);
-                                                    $queryLMSMS = "SELECT SUM(excel.revenue) as revenue_lmsms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2019-12-01' and '2019-12-16'";
-                                                    $dataLMSMS = mysqli_query($koneksi, $queryLMSMS);
-                                                    while ($row = mysqli_fetch_assoc($dataLMSMS)) {
-                                                        $row['revenue_lmsms'];
-                                                        $hasil_rupiahlmsms = " " . number_format($row['revenue_lmsms'], 2, ',', '.');
-                                                        $hasil_rupiahlmsms;
-                                                    }
+                                    </select>
+                                    <br>
+                                    <h6>Select L1_Name</h6>
+                                    <select class="l1 form-control">
+                                        <option>All</option>
+                                        <option>SMS P2P</option>
+                                        <option>Voice P2P</option>
+                                    </select>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary" value="FILTER">Tampilkan</button>
 
-                                                    $queryMTDSMS = "SELECT SUM(excel.revenue) as revenue_mtdsms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-16'";
-                                                    $dataMtDsms = mysqli_query($koneksi, $queryMTDSMS);
-                                                    while ($row = mysqli_fetch_assoc($dataMtDsms)) {
-                                                        $row['revenue_mtdsms'];
-                                                        $hasil_rupiahMTDsms = " " . number_format($row['revenue_mtdsms'], 2, ',', '.');
-                                                        $hasil_rupiahMTDsms;
-                                                    }
-                                                    $queryMoMsms = (($hasil_rupiahMTDsms / $hasil_rupiahlmsms - 1) * 100);
-                                                    echo round($queryMoMsms, 1);
+                                </form>
 
-                                                    ?> %
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                    error_reporting(0);
-                                                    $queryLMVOICE = "SELECT SUM(excel.revenue) as revenue_lmvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2019-12-01' and '2019-12-16'";
-                                                    $dataLMVOICE = mysqli_query($koneksi, $queryLMVOICE);
-                                                    while ($row = mysqli_fetch_assoc($dataLMVOICE)) {
-                                                        $row['revenue_lmvoice'];
-                                                        $hasil_rupiahlmvoice = " " . number_format($row['revenue_lmvoice'], 2, ',', '.');
-                                                        $hasil_rupiahlmvoice;
-                                                    }
-                                                    $queryMTDVOICE = "SELECT SUM(excel.revenue) as revenue_mtdvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-16'";
-                                                    $dataMtDvoice = mysqli_query($koneksi, $queryMTDVOICE);
-                                                    while ($row = mysqli_fetch_assoc($dataMtDvoice)) {
-                                                        $row['revenue_mtdvoice'];
-                                                        $hasil_rupiahMTDvoice = " " . number_format($row['revenue_mtdvoice'], 2, ',', '.');
-                                                        $hasil_rupiahMTDvoice;
-                                                    }
-                                                    $queryMoMvoice = (($hasil_rupiahMTDvoice / $hasil_rupiahlmvoice - 1) * 100);
-                                                    echo round($queryMoMvoice, 1);
-
-                                                    ?> %
-                                                </td>
-                                            </tr>
-                                            <!-- yoy -->
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td>
-                                                    <?php
-                                                    error_reporting(0);
-                                                    $queryMTDsms = "SELECT SUM(revenue) as revenue_mtdsms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-16'";
-                                                    $dataMTDsms = mysqli_query($koneksi, $queryMTDsms);
-                                                    while ($rowmtdsms = mysqli_fetch_assoc($dataMTDsms)) {
-                                                        $rowmtdsms['revenue_mtdsms'];
-                                                        $hasil_rupiahmtdsms = "" . number_format($rowmtdsms['revenue_mtdsms'], 2, ',', '.');
-                                                        $hasil_rupiahmtdsms;
-                                                    }
-
-                                                    $queryLYsms = "SELECT SUM(revenue) as revenue_lysms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2019-01-01' and '2019-01-16'";
-                                                    $dataLYsms = mysqli_query($koneksi, $queryLYsms);
-                                                    while ($row = mysqli_fetch_assoc($dataLYsms)) {
-                                                        $row['revenue_lysms'];
-                                                        $hasil_rupiahlysms = "" . number_format($row['revenue_lysms'], 2, ',', '.');
-                                                        $hasil_rupiahlysms;
-                                                    }
-                                                    $queryYoYsms = (($hasil_rupiahmtdsms / $hasil_rupiahlysms - 1) * 100);
-                                                    echo round($queryYoYsms, 1);
-                                                    ?>
-                                                    %
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                    error_reporting(0);
-                                                    $queryMtdvoice = "SELECT SUM(excel.revenue) as revenue_mdvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-16'";
-                                                    $dataMtDvoice = mysqli_query($koneksi, $queryMtdvoice);
-                                                    while ($row = mysqli_fetch_assoc($dataMtDvoice)) {
-                                                        $row['revenue_mdvoice'];
-                                                        $hasil_rupiahmtdvoice = " " . number_format($row['revenue_mdvoice'], 2, ',', '.');
-                                                        $hasil_rupiahmtdvoice;
-                                                    }
-
-                                                    $queryLYvoice = "SELECT SUM(excel.revenue) as revenue_lyvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2019-01-01' and '2019-01-16'";
-                                                    $dataLYvoice = mysqli_query($koneksi, $queryLYvoice);
-                                                    while ($row = mysqli_fetch_assoc($dataLYvoice)) {
-                                                        $row['revenue_lyvoice'];
-                                                        $hasil_rupiahlyvoice = " " . number_format($row['revenue_lyvoice'], 2, ',', '.');
-                                                        $hasil_rupiahlyvoice;
-                                                    }
-
-                                                    $queryYoYvoice = (($hasil_rupiahmtdvoice / $hasil_rupiahlyvoice - 1) * 100);
-                                                    echo round($queryYoYvoice, 1);
-                                                    ?>
-                                                    %
-                                                </td>
-                                            </tr>
-
-                                    </table>
-                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Content Row - chart -->
-                    <div class="row">
-                        <!-- Area Chart -->
-                        <div class="col-xl-8 col-lg-7">
+                        <br>
+                        <!-- Begin Page Content -->
+                        <div class="container-fluid">
+
+                            <!-- DataTales Example -->
                             <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Trending Daily Usage </h6>
-
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">L1 Data Table</h6>
                                 </div>
-                                <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>BroadBand</th>
+                                                    <th>Digital Services</th>
+                                                    <th>SMS P2P</th>
+                                                    <th>Voice P2P</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Revenue MTD</td>
+                                                    <td>Revenue MTD</td>
+                                                    <td>Revenue MTD</td>
+                                                    <td>Revenue MTD</td>
+                                                </tr>
+                                                <!-- revenue mtd -->
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        Rp.
+                                                        <?php
+                                                        $querySMS = "SELECT SUM(excel.revenue) as revenue_sms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-16'";
+                                                        $dataSMS = mysqli_query($koneksi, $querySMS);
+                                                        while ($row = mysqli_fetch_assoc($dataSMS)) {
+                                                            $row['revenue_sms'];
+                                                            $hasil_rupiah = " " . number_format($row['revenue_sms'], 2, ',', '.');
+                                                            echo $hasil_rupiah;
+                                                        }
+                                                        ?>
+                                                        B
+                                                    </td>
+                                                    <td>
+                                                        Rp.
+                                                        <?php
+                                                        $queryV = "SELECT SUM(excel.revenue) as revenue_voice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-16'";
+                                                        $dataV = mysqli_query($koneksi, $queryV);
+                                                        while ($row = mysqli_fetch_assoc($dataV)) {
+                                                            $row['revenue_voice'];
+                                                            echo number_format($row['revenue_voice']);
+                                                        }
+                                                        ?>
+                                                        B
+                                                    </td>
+                                                </tr>
+                                                <!-- mom -->
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <?php
+                                                        error_reporting(0);
+                                                        $queryLMSMS = "SELECT SUM(excel.revenue) as revenue_lmsms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2019-12-01' and '2019-12-16'";
+                                                        $dataLMSMS = mysqli_query($koneksi, $queryLMSMS);
+                                                        while ($row = mysqli_fetch_assoc($dataLMSMS)) {
+                                                            $row['revenue_lmsms'];
+                                                            $hasil_rupiahlmsms = " " . number_format($row['revenue_lmsms'], 2, ',', '.');
+                                                            $hasil_rupiahlmsms;
+                                                        }
+
+                                                        $queryMTDSMS = "SELECT SUM(excel.revenue) as revenue_mtdsms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-16'";
+                                                        $dataMtDsms = mysqli_query($koneksi, $queryMTDSMS);
+                                                        while ($row = mysqli_fetch_assoc($dataMtDsms)) {
+                                                            $row['revenue_mtdsms'];
+                                                            $hasil_rupiahMTDsms = " " . number_format($row['revenue_mtdsms'], 2, ',', '.');
+                                                            $hasil_rupiahMTDsms;
+                                                        }
+                                                        $queryMoMsms = (($hasil_rupiahMTDsms / $hasil_rupiahlmsms - 1) * 100);
+                                                        echo round($queryMoMsms, 1);
+
+                                                        ?> %
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        error_reporting(0);
+                                                        $queryLMVOICE = "SELECT SUM(excel.revenue) as revenue_lmvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2019-12-01' and '2019-12-16'";
+                                                        $dataLMVOICE = mysqli_query($koneksi, $queryLMVOICE);
+                                                        while ($row = mysqli_fetch_assoc($dataLMVOICE)) {
+                                                            $row['revenue_lmvoice'];
+                                                            $hasil_rupiahlmvoice = " " . number_format($row['revenue_lmvoice'], 2, ',', '.');
+                                                            $hasil_rupiahlmvoice;
+                                                        }
+                                                        $queryMTDVOICE = "SELECT SUM(excel.revenue) as revenue_mtdvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-16'";
+                                                        $dataMtDvoice = mysqli_query($koneksi, $queryMTDVOICE);
+                                                        while ($row = mysqli_fetch_assoc($dataMtDvoice)) {
+                                                            $row['revenue_mtdvoice'];
+                                                            $hasil_rupiahMTDvoice = " " . number_format($row['revenue_mtdvoice'], 2, ',', '.');
+                                                            $hasil_rupiahMTDvoice;
+                                                        }
+                                                        $queryMoMvoice = (($hasil_rupiahMTDvoice / $hasil_rupiahlmvoice - 1) * 100);
+                                                        echo round($queryMoMvoice, 1);
+
+                                                        ?> %
+                                                    </td>
+                                                </tr>
+                                                <!-- yoy -->
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <?php
+                                                        error_reporting(0);
+                                                        $queryMTDsms = "SELECT SUM(revenue) as revenue_mtdsms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-16'";
+                                                        $dataMTDsms = mysqli_query($koneksi, $queryMTDsms);
+                                                        while ($rowmtdsms = mysqli_fetch_assoc($dataMTDsms)) {
+                                                            $rowmtdsms['revenue_mtdsms'];
+                                                            $hasil_rupiahmtdsms = "" . number_format($rowmtdsms['revenue_mtdsms'], 2, ',', '.');
+                                                            $hasil_rupiahmtdsms;
+                                                        }
+
+                                                        $queryLYsms = "SELECT SUM(revenue) as revenue_lysms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '2019-01-01' and '2019-01-16'";
+                                                        $dataLYsms = mysqli_query($koneksi, $queryLYsms);
+                                                        while ($row = mysqli_fetch_assoc($dataLYsms)) {
+                                                            $row['revenue_lysms'];
+                                                            $hasil_rupiahlysms = "" . number_format($row['revenue_lysms'], 2, ',', '.');
+                                                            $hasil_rupiahlysms;
+                                                        }
+                                                        $queryYoYsms = (($hasil_rupiahmtdsms / $hasil_rupiahlysms - 1) * 100);
+                                                        echo round($queryYoYsms, 1);
+                                                        ?>
+                                                        %
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        error_reporting(0);
+                                                        $queryMtdvoice = "SELECT SUM(excel.revenue) as revenue_mdvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2020-01-01' and '2020-01-16'";
+                                                        $dataMtDvoice = mysqli_query($koneksi, $queryMtdvoice);
+                                                        while ($row = mysqli_fetch_assoc($dataMtDvoice)) {
+                                                            $row['revenue_mdvoice'];
+                                                            $hasil_rupiahmtdvoice = " " . number_format($row['revenue_mdvoice'], 2, ',', '.');
+                                                            $hasil_rupiahmtdvoice;
+                                                        }
+
+                                                        $queryLYvoice = "SELECT SUM(excel.revenue) as revenue_lyvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '2019-01-01' and '2019-01-16'";
+                                                        $dataLYvoice = mysqli_query($koneksi, $queryLYvoice);
+                                                        while ($row = mysqli_fetch_assoc($dataLYvoice)) {
+                                                            $row['revenue_lyvoice'];
+                                                            $hasil_rupiahlyvoice = " " . number_format($row['revenue_lyvoice'], 2, ',', '.');
+                                                            $hasil_rupiahlyvoice;
+                                                        }
+
+                                                        $queryYoYvoice = (($hasil_rupiahmtdvoice / $hasil_rupiahlyvoice - 1) * 100);
+                                                        echo round($queryYoYvoice, 1);
+                                                        ?>
+                                                        %
+                                                    </td>
+                                                </tr>
+
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Pie Chart -->
-                        <div class="col-xl-4 col-lg-5">
+                        <!-- Content Row - chart -->
+                        <div class="row">
+                            <!-- Area Chart -->
+                            <div class="col-xl-8 col-lg-7">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Trending Daily Usage </h6>
+
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="chart-area">
+                                            <canvas id="myAreaChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Pie Chart -->
+                            <div class="col-xl-4 col-lg-5">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Pie Chart</h6>
+                                        <div class="dropdown no-arrow">
+
+                                        </div>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="chart-pie pt-4 pb-2">
+                                            <canvas id="myPieChart"></canvas>
+                                        </div>
+                                        <div class="mt-4 text-center small">
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle text-primary"></i> Digital Service
+                                            </span>
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle text-success"></i> BroadBand
+                                            </span>
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle text-info"></i> Voice P2P
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bar Chart -->
                             <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Pie Chart</h6>
-                                    <div class="dropdown no-arrow">
-
-                                    </div>
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Growth Daily Usage</h6>
                                 </div>
-                                <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="chart-pie pt-4 pb-2">
-                                        <canvas id="myPieChart"></canvas>
+                                    <div class="chart-bar">
+                                        <canvas id="myBarChart"></canvas>
                                     </div>
-                                    <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Digital Service
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> BroadBand
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> Voice P2P
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Bar Chart -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Growth Daily Usage</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="chart-bar">
-                                    <canvas id="myBarChart"></canvas>
                                 </div>
-
                             </div>
                         </div>
                     </div>
+                    <!-- /.container-fluid -->
                 </div>
-                <!-- /.container-fluid -->
+                <!-- End of Main Content -->
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; 2020</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
             </div>
-            <!-- End of Main Content -->
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; 2020</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
 
-    <script type="text/javascript">
-        $(function() {
-            $(".datepicker").datepicker({
-                format: 'yyyy-mm-dd',
-                autoclose: true,
-                todayHighlight: true,
+        <script type="text/javascript">
+            $(function() {
+                $(".datepicker").datepicker({
+                    format: 'yyyy-mm-dd',
+                    autoclose: true,
+                    todayHighlight: true,
+                });
             });
-        });
-    </script>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script src="js/bootstrap-datepicker.js"></script>
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        </script>
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <script src="js/bootstrap-datepicker.js"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
-    <script src="js/demo/chart-bar-demo.js"></script>
-    <script src="js/custom.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="js/demo/chart-area-demo.js"></script>
+        <script src="js/demo/chart-pie-demo.js"></script>
+        <script src="js/demo/chart-bar-demo.js"></script>
+        <script src="js/custom.js"></script>
 
-    <!-- JQuery -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.17.0/js/mdb.min.js"></script>
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.17.0/js/mdb.min.js"></script>
 
 </body>
 
