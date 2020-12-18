@@ -201,7 +201,7 @@ require("conf/conn.php");
 														$data = mysqli_fetch_array($sql);
 														$data['revenue_mtd'];
 														$hasil_rupiah = " " . number_format($data['revenue_mtd'], 2, ',', '.');
-														echo round($hasil_rupiah, 2);
+														echo round($hasil_rupiah, 1);
 													} else {
 														$sql = mysqli_query($koneksi, "SELECT * from excel");
 													}
@@ -269,7 +269,7 @@ require("conf/conn.php");
 												<div class="text-xs font-weight-bold text-success text-uppercase mb-1">
 													Growth YoY</div>
 												<div class="h5 mb-0 font-weight-bold text-gray-800">
-												<?php
+													<?php
 													error_reporting(0);
 													if (isset($_GET['tanggal'])) {
 														$tgl = $_GET['tanggal'];
@@ -313,7 +313,7 @@ require("conf/conn.php");
 												<div class="text-xs font-weight-bold text-success text-uppercase mb-1">
 													DU Last Month</div>
 												<div class="h5 mb-0 font-weight-bold text-gray-800"> Rp.
-												<?php
+													<?php
 													error_reporting(0);
 													if (isset($_GET['tanggal'])) {
 														$tgl = $_GET['tanggal'];
@@ -322,7 +322,7 @@ require("conf/conn.php");
 														$datalm = mysqli_fetch_array($sqllastmonth);
 														$datalm['revenue_lm'];
 														$hasil_rupiahlastmonth = " " . number_format($datalm['revenue_lm'], 2, ',', '.');
-														echo round($hasil_rupiahlastmonth,1);
+														echo round($hasil_rupiahlastmonth, 1);
 													} else {
 														$sql = mysqli_query($koneksi, "SELECT * from excel");
 													}
@@ -345,7 +345,30 @@ require("conf/conn.php");
 												<div class="text-xs font-weight-bold text-success text-uppercase mb-1">
 													DU MTD</div>
 												<div class="h5 mb-0 font-weight-bold text-gray-800">
-												
+													<?php
+													error_reporting(0);
+													if (isset($_GET['tanggal'])) {
+														$tgl = $_GET['tanggal'];
+														$tgl2 = $_GET['tanggal2'];
+
+														$sql = mysqli_query($koneksi, "SELECT SUM(revenue) as revenue_mtd from excel where excel.date between '$tgl' and '$tgl2'");
+														$data = mysqli_fetch_array($sql);
+														$data['revenue_mtd'];
+														$hasil_rupiah = " " . number_format($data['revenue_mtd'], 2, ',', '.');
+														$hasildu = round($hasil_rupiah, 1);
+
+														// $sql_diff = mysqli_query($koneksi,"SELECT * from excel where excel.date between '$tgl' and '$tgl2' ");
+														$tglawal = new DateTime("$tgl");
+														$tglakhir = new DateTime("$tgl2");
+														$d = $tglakhir->diff($tglawal)->days + 1;
+														$d;
+														
+														$duMtd = $hasildu / $d;
+														echo round($duMtd,2);
+													} else {
+														$sql = mysqli_query($koneksi, "SELECT * from excel");
+													}
+													?>
 												</div>
 											</div>
 											<div class="col-auto">
@@ -388,38 +411,38 @@ require("conf/conn.php");
 													<td></td>
 													<td></td>
 													<td>
-													Rp.
-													<?php
-													if (isset($_GET['tanggal'])) {
-														$tgl = $_GET['tanggal'];
-														$tgl2 = $_GET['tanggal2'];
-														$sqlsms = mysqli_query($koneksi, "SELECT SUM(excel.revenue) as revenue_sms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '$tgl' and '$tgl2'");
-														$datasms = mysqli_fetch_array($sqlsms);
-														$datasms['revenue_sms'];
-														$hasil_rupiahsms = " " . number_format($datasms['revenue_sms'], 2, ',', '.');
-														echo round($hasil_rupiahsms, 2);
-													} else {
-														$sql = mysqli_query($koneksi, "SELECT * from excel");
-													}
-													?>
-													B
+														Rp.
+														<?php
+														if (isset($_GET['tanggal'])) {
+															$tgl = $_GET['tanggal'];
+															$tgl2 = $_GET['tanggal2'];
+															$sqlsms = mysqli_query($koneksi, "SELECT SUM(excel.revenue) as revenue_sms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date BETWEEN '$tgl' and '$tgl2'");
+															$datasms = mysqli_fetch_array($sqlsms);
+															$datasms['revenue_sms'];
+															$hasil_rupiahsms = " " . number_format($datasms['revenue_sms'], 2, ',', '.');
+															echo round($hasil_rupiahsms, 2);
+														} else {
+															$sql = mysqli_query($koneksi, "SELECT * from excel");
+														}
+														?>
+														B
 													</td>
 													<td>
-													Rp.
-													<?php
-													if (isset($_GET['tanggal'])) {
-														$tgl = $_GET['tanggal'];
-														$tgl2 = $_GET['tanggal2'];
-														$sqlvoice = mysqli_query($koneksi, "SELECT SUM(excel.revenue) as revenue_voice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '$tgl' and '$tgl2'");
-														$datavoice = mysqli_fetch_array($sqlvoice);
-														$datavoice['revenue_voice'];
-														$hasil_rupiahvoice = " " . number_format($datavoice['revenue_voice'], 2, ',', '.');
-														echo round($hasil_rupiahvoice, 2);
-													} else {
-														$sql = mysqli_query($koneksi, "SELECT * from excel");
-													}
-													?>
-													B
+														Rp.
+														<?php
+														if (isset($_GET['tanggal'])) {
+															$tgl = $_GET['tanggal'];
+															$tgl2 = $_GET['tanggal2'];
+															$sqlvoice = mysqli_query($koneksi, "SELECT SUM(excel.revenue) as revenue_voice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date BETWEEN '$tgl' and '$tgl2'");
+															$datavoice = mysqli_fetch_array($sqlvoice);
+															$datavoice['revenue_voice'];
+															$hasil_rupiahvoice = " " . number_format($datavoice['revenue_voice'], 2, ',', '.');
+															echo round($hasil_rupiahvoice, 2);
+														} else {
+															$sql = mysqli_query($koneksi, "SELECT * from excel");
+														}
+														?>
+														B
 													</td>
 												</tr>
 												<!-- mom -->
@@ -427,58 +450,58 @@ require("conf/conn.php");
 													<td></td>
 													<td></td>
 													<td>
-													<?php
-													error_reporting(0);
-													if (isset($_GET['tanggal'])) {
-														$tgl = $_GET['tanggal'];
-														$tgl2 = $_GET['tanggal2'];
+														<?php
+														error_reporting(0);
+														if (isset($_GET['tanggal'])) {
+															$tgl = $_GET['tanggal'];
+															$tgl2 = $_GET['tanggal2'];
 
-														$sqlsmsmtd = mysqli_query($koneksi, "SELECT SUM(revenue) as revenue_smsmtd from excel WHERE excel.l1 = 'SMS P2P' AND excel.date between '$tgl' and '$tgl2'");
-														$datasmsmtd = mysqli_fetch_array($sqlsmsmtd);
-														$datasmsmtd['revenue_smsmtd'];
-														$hasil_rupiahsmsmtd = " " . number_format($datasmsmtd['revenue_smsmtd'], 2, ',', '.');
-														$hasil_rupiahsmsmtd;
+															$sqlsmsmtd = mysqli_query($koneksi, "SELECT SUM(revenue) as revenue_smsmtd from excel WHERE excel.l1 = 'SMS P2P' AND excel.date between '$tgl' and '$tgl2'");
+															$datasmsmtd = mysqli_fetch_array($sqlsmsmtd);
+															$datasmsmtd['revenue_smsmtd'];
+															$hasil_rupiahsmsmtd = " " . number_format($datasmsmtd['revenue_smsmtd'], 2, ',', '.');
+															$hasil_rupiahsmsmtd;
 
-														$sqlsmslastmonth = mysqli_query($koneksi, "SELECT SUM(revenue) as revenue_smslm from excel WHERE excel.l1 = 'SMS P2P' AND excel.date between DATE_SUB('$tgl', INTERVAL 1 MONTH) and DATE_SUB('$tgl2', INTERVAL 1 MONTH)");
-														$datasmslm = mysqli_fetch_array($sqlsmslastmonth);
-														$datasmslm['revenue_smslm'];
-														$hasil_rupiahlastmonthsms = " " . number_format($datasmslm['revenue_smslm'], 2, ',', '.');
-														$hasil_rupiahlastmonthsms;
+															$sqlsmslastmonth = mysqli_query($koneksi, "SELECT SUM(revenue) as revenue_smslm from excel WHERE excel.l1 = 'SMS P2P' AND excel.date between DATE_SUB('$tgl', INTERVAL 1 MONTH) and DATE_SUB('$tgl2', INTERVAL 1 MONTH)");
+															$datasmslm = mysqli_fetch_array($sqlsmslastmonth);
+															$datasmslm['revenue_smslm'];
+															$hasil_rupiahlastmonthsms = " " . number_format($datasmslm['revenue_smslm'], 2, ',', '.');
+															$hasil_rupiahlastmonthsms;
 
-														$queryMoMsms = (($hasil_rupiahsmsmtd / $hasil_rupiahlastmonthsms - 1) * 100);
-														echo round($queryMoMsms, 1);
-													} else {
-														$sql = mysqli_query($koneksi, "SELECT * from excel");
-													}
-													?>
-													%
+															$queryMoMsms = (($hasil_rupiahsmsmtd / $hasil_rupiahlastmonthsms - 1) * 100);
+															echo round($queryMoMsms, 1);
+														} else {
+															$sql = mysqli_query($koneksi, "SELECT * from excel");
+														}
+														?>
+														%
 													</td>
 													<td>
-													<?php
-													error_reporting(0);
-													if (isset($_GET['tanggal'])) {
-														$tgl = $_GET['tanggal'];
-														$tgl2 = $_GET['tanggal2'];
+														<?php
+														error_reporting(0);
+														if (isset($_GET['tanggal'])) {
+															$tgl = $_GET['tanggal'];
+															$tgl2 = $_GET['tanggal2'];
 
-														$sqlvoicemtd = mysqli_query($koneksi, "SELECT SUM(revenue) as revenue_voicemtd from excel WHERE excel.l1 = 'Voice P2P' AND excel.date between '$tgl' and '$tgl2'");
-														$datavoicemtd = mysqli_fetch_array($sqlvoicemtd);
-														$datavoicemtd['revenue_voicemtd'];
-														$hasil_rupiahvoicemtd = " " . number_format($datavoicemtd['revenue_voicemtd'], 2, ',', '.');
-														$hasil_rupiahvoicemtd;
+															$sqlvoicemtd = mysqli_query($koneksi, "SELECT SUM(revenue) as revenue_voicemtd from excel WHERE excel.l1 = 'Voice P2P' AND excel.date between '$tgl' and '$tgl2'");
+															$datavoicemtd = mysqli_fetch_array($sqlvoicemtd);
+															$datavoicemtd['revenue_voicemtd'];
+															$hasil_rupiahvoicemtd = " " . number_format($datavoicemtd['revenue_voicemtd'], 2, ',', '.');
+															$hasil_rupiahvoicemtd;
 
-														$sqlvoicelastmonth = mysqli_query($koneksi, "SELECT SUM(revenue) as revenue_voicelm from excel WHERE excel.l1 = 'Voice P2P' AND excel.date between DATE_SUB('$tgl', INTERVAL 1 MONTH) and DATE_SUB('$tgl2', INTERVAL 1 MONTH)");
-														$datavoicelm = mysqli_fetch_array($sqlvoicelastmonth);
-														$datavoicelm['revenue_voicelm'];
-														$hasil_rupiahlastmonthvoice = " " . number_format($datavoicelm['revenue_voicelm'], 2, ',', '.');
-														$hasil_rupiahlastmonthvoice;
+															$sqlvoicelastmonth = mysqli_query($koneksi, "SELECT SUM(revenue) as revenue_voicelm from excel WHERE excel.l1 = 'Voice P2P' AND excel.date between DATE_SUB('$tgl', INTERVAL 1 MONTH) and DATE_SUB('$tgl2', INTERVAL 1 MONTH)");
+															$datavoicelm = mysqli_fetch_array($sqlvoicelastmonth);
+															$datavoicelm['revenue_voicelm'];
+															$hasil_rupiahlastmonthvoice = " " . number_format($datavoicelm['revenue_voicelm'], 2, ',', '.');
+															$hasil_rupiahlastmonthvoice;
 
-														$queryMoMvoice = (($hasil_rupiahvoicemtd / $hasil_rupiahlastmonthvoice - 1) * 100);
-														echo round($queryMoMvoice, 1);
-													} else {
-														$sql = mysqli_query($koneksi, "SELECT * from excel");
-													}
-													?>
-													%
+															$queryMoMvoice = (($hasil_rupiahvoicemtd / $hasil_rupiahlastmonthvoice - 1) * 100);
+															echo round($queryMoMvoice, 1);
+														} else {
+															$sql = mysqli_query($koneksi, "SELECT * from excel");
+														}
+														?>
+														%
 													</td>
 												</tr>
 												<!-- yoy -->
@@ -486,58 +509,58 @@ require("conf/conn.php");
 													<td></td>
 													<td></td>
 													<td>
-													<?php
-													error_reporting(0);
-													if (isset($_GET['tanggal'])) {
-														$tgl = $_GET['tanggal'];
-														$tgl2 = $_GET['tanggal2'];
+														<?php
+														error_reporting(0);
+														if (isset($_GET['tanggal'])) {
+															$tgl = $_GET['tanggal'];
+															$tgl2 = $_GET['tanggal2'];
 
-														$sql_mtd_sms = mysqli_query($koneksi, "SELECT SUM(revenue) as revenue_mtdsms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date between '$tgl' and '$tgl2'");
-														$data_mtd_sms = mysqli_fetch_array($sql_mtd_sms);
-														$data_mtd_sms['revenue_mtdsms'];
-														$hasil_rupiah_mtd_sms = " " . number_format($data_mtd_sms['revenue_mtdsms'], 2, ',', '.');
-														$hasil_rupiah_mtd_sms;
+															$sql_mtd_sms = mysqli_query($koneksi, "SELECT SUM(revenue) as revenue_mtdsms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date between '$tgl' and '$tgl2'");
+															$data_mtd_sms = mysqli_fetch_array($sql_mtd_sms);
+															$data_mtd_sms['revenue_mtdsms'];
+															$hasil_rupiah_mtd_sms = " " . number_format($data_mtd_sms['revenue_mtdsms'], 2, ',', '.');
+															$hasil_rupiah_mtd_sms;
 
-														$sqllastyear_sms = mysqli_query($koneksi, "SELECT SUM(revenue) as revenue_lysms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date between DATE_SUB('$tgl', INTERVAL 1 YEAR) and DATE_SUB('$tgl2', INTERVAL 1 YEAR)");
-														$dataly_sms = mysqli_fetch_array($sqllastyear_sms);
-														$dataly_sms['revenue_lysms'];
-														$hasil_rupiahlastyear_sms = " " . number_format($dataly_sms['revenue_lysms'], 2, ',', '.');
-														$hasil_rupiahlastyear_sms;
+															$sqllastyear_sms = mysqli_query($koneksi, "SELECT SUM(revenue) as revenue_lysms from excel WHERE excel.l1 = 'SMS P2P' AND excel.date between DATE_SUB('$tgl', INTERVAL 1 YEAR) and DATE_SUB('$tgl2', INTERVAL 1 YEAR)");
+															$dataly_sms = mysqli_fetch_array($sqllastyear_sms);
+															$dataly_sms['revenue_lysms'];
+															$hasil_rupiahlastyear_sms = " " . number_format($dataly_sms['revenue_lysms'], 2, ',', '.');
+															$hasil_rupiahlastyear_sms;
 
-														$queryYoYsms = (($hasil_rupiah_mtd_sms / $hasil_rupiahlastyear_sms - 1) * 100);
-														echo round($queryYoYsms, 1);
-													} else {
-														$sql = mysqli_query($koneksi, "SELECT * from excel");
-													}
-													?>
-													%
+															$queryYoYsms = (($hasil_rupiah_mtd_sms / $hasil_rupiahlastyear_sms - 1) * 100);
+															echo round($queryYoYsms, 1);
+														} else {
+															$sql = mysqli_query($koneksi, "SELECT * from excel");
+														}
+														?>
+														%
 													</td>
 													<td>
-													<?php
-													error_reporting(0);
-													if (isset($_GET['tanggal'])) {
-														$tgl = $_GET['tanggal'];
-														$tgl2 = $_GET['tanggal2'];
+														<?php
+														error_reporting(0);
+														if (isset($_GET['tanggal'])) {
+															$tgl = $_GET['tanggal'];
+															$tgl2 = $_GET['tanggal2'];
 
-														$sql_mtd_voice = mysqli_query($koneksi, "SELECT SUM(revenue) as revenue_mdvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date between '$tgl' and '$tgl2'");
-														$data_mtd_voice = mysqli_fetch_array($sql_mtd_voice);
-														$data_mtd_voice['revenue_mdvoice'];
-														$hasil_rupiah_mtd_voice = " " . number_format($data_mtd_voice['revenue_mdvoice'], 2, ',', '.');
-														$hasil_rupiah_mtd_voice;
+															$sql_mtd_voice = mysqli_query($koneksi, "SELECT SUM(revenue) as revenue_mdvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date between '$tgl' and '$tgl2'");
+															$data_mtd_voice = mysqli_fetch_array($sql_mtd_voice);
+															$data_mtd_voice['revenue_mdvoice'];
+															$hasil_rupiah_mtd_voice = " " . number_format($data_mtd_voice['revenue_mdvoice'], 2, ',', '.');
+															$hasil_rupiah_mtd_voice;
 
-														$sqllastyear_voice = mysqli_query($koneksi, "SELECT SUM(revenue) as revenue_lyvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date between DATE_SUB('$tgl', INTERVAL 1 YEAR) and DATE_SUB('$tgl2', INTERVAL 1 YEAR)");
-														$dataly_voice = mysqli_fetch_array($sqllastyear_voice);
-														$dataly_voice['revenue_lyvoice'];
-														$hasil_rupiahlastyear_voice = " " . number_format($dataly_voice['revenue_lyvoice'], 2, ',', '.');
-														$hasil_rupiahlastyear_voice;
+															$sqllastyear_voice = mysqli_query($koneksi, "SELECT SUM(revenue) as revenue_lyvoice from excel WHERE excel.l1 = 'Voice P2P' AND excel.date between DATE_SUB('$tgl', INTERVAL 1 YEAR) and DATE_SUB('$tgl2', INTERVAL 1 YEAR)");
+															$dataly_voice = mysqli_fetch_array($sqllastyear_voice);
+															$dataly_voice['revenue_lyvoice'];
+															$hasil_rupiahlastyear_voice = " " . number_format($dataly_voice['revenue_lyvoice'], 2, ',', '.');
+															$hasil_rupiahlastyear_voice;
 
-														$queryYoYvoice = (($hasil_rupiah_mtd_voice / $hasil_rupiahlastyear_voice - 1) * 100);
-														echo round($queryYoYvoice, 1);
-													} else {
-														$sql = mysqli_query($koneksi, "SELECT * from excel");
-													}
-													?>
-													%
+															$queryYoYvoice = (($hasil_rupiah_mtd_voice / $hasil_rupiahlastyear_voice - 1) * 100);
+															echo round($queryYoYvoice, 1);
+														} else {
+															$sql = mysqli_query($koneksi, "SELECT * from excel");
+														}
+														?>
+														%
 													</td>
 												</tr>
 
