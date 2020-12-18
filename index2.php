@@ -29,7 +29,6 @@ require("conf/conn.php");
 		<br/> <br/>
 		<table border="1">
 			<tr>
-				
 				<th>Jumlah</th>
 			</tr>
 			<?php 
